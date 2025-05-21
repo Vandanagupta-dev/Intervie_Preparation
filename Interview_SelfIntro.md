@@ -24,6 +24,7 @@ Lekin ab main apne aapko next level pe le jaana chahti hoon — jahan mujhe naye
 Chandigarh ki aapki company mujhe ek aisa hi platform lagti hai jahan main apne existing skills ka use kar sakti hoon, aur naye tools aur technologies bhi seekh sakti hoon."
 
 ✅ Optional: Pure English Version (if interview is fully in English):
+
 "I’ve learned a lot in my current company, especially working with .NET MVC, Core, and Entity Framework. But now I’m looking for new challenges and opportunities that allow me to grow further in my career.
 I believe your company in Chandigarh offers the kind of projects and learning environment I’m aiming for."
 
