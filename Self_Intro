@@ -96,3 +96,60 @@ Absolutely! Here's a **set of professional, confident, and polite answers** you 
 
 Let me know if you'd like to **practice mock answers** with your real experience, or if you want to convert this into **Hindi** or prepare answers specific to a certain job role (e.g., .NET Developer, Backend Developer, etc.)
 
+
+---
+
+Absolutely! Here's a **sample set of answers** to common **project-based interview questions**, tailored for a **.NET Developer** like you — with experience in `.NET Core`, `MVC`, `EF`, and frontend/backend work.
+
+---
+
+### ✅ **1. Can you explain a project you have worked on?**
+
+> **Answer:**
+>
+> "Yes, I worked on a *User Management System* for an internal admin panel. The purpose was to allow administrators to manage users, roles, and subscriptions. The system also included features like user filtering, editing, activating/deactivating users, and handling subscription expiry with email notifications."
+
+---
+
+### ✅ **2. What was your role in the project?**
+
+> **Answer:**
+>
+> "I was responsible for both backend and frontend development. I created APIs using ASP.NET Core, built the UI using Razor Pages, implemented database operations with ADO.NET and stored procedures, and handled user interface logic like pagination, dropdown filters, and data validations."
+
+---
+
+### ✅ **3. Which technologies did you use in that project?**
+
+> **Answer:**
+>
+> "I used the following stack:
+>
+> * **Backend**: ASP.NET Core MVC
+> * **ORM / DB Access**: ADO.NET with Stored Procedures, and in some modules Entity Framework Core
+> * **Frontend**: Razor Pages, HTML, CSS, JavaScript (basic validation)
+> * **Database**: MS SQL Server
+> * **Others**: Dependency Injection, appsettings.json for configuration, and SMTP for sending emails."
+
+---
+
+### ✅ **4. Did you face any challenges? How did you solve them?**
+
+> **Answer:**
+>
+> "Yes, one challenge was handling subscription expiry dynamically and updating user status accordingly. The logic had to be applied across multiple places — in UI, database, and email notifications. I solved it by writing a centralized method to calculate `DaysLeft`, and used conditional logic to change the status and trigger email notifications.
+>
+> I also faced a few issues while migrating code from legacy Web Forms to Razor Pages, especially in managing ViewModels and routing — but I solved them by breaking the logic into partial views and using clean separation of concerns."
+
+---
+
+### ✅ **5. How do you handle version control? Have you used Git?**
+
+> **Answer:**
+>
+> "Yes, I have used Git for version control. I worked with GitHub and Bitbucket. I’m familiar with basic commands like `clone`, `commit`, `push`, `pull`, and `branching`. I also follow Git workflow standards like creating feature branches, committing with proper messages, and merging using pull requests."
+
+---
+
+Let me know if you'd like to personalize these answers with your **actual project name** or need help explaining a **real project** you worked on (I can help frame it perfectly for interviews).
+
