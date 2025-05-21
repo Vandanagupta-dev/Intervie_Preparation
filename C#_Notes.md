@@ -292,3 +292,88 @@ Here `Foo<T>` is a static, generic, partial class only visible inside its own as
 
 Feel free to drill into any of these topics or ask for sample code!
 **
+
+---
+Sure! Here's a concise yet clear answer for each **.NET Core technical question** you asked, perfect for interviews:
+
+---
+
+### 1. **What is the difference between .NET Core and .NET Framework?**
+
+* **.NET Framework** is Windows-only, mature, and used mainly for desktop and ASP.NET applications.
+* **.NET Core** is cross-platform (Windows, Linux, macOS), lightweight, open-source, and designed for modern cloud and web apps.
+* .NET Core supports modular architecture and side-by-side versioning, unlike .NET Framework.
+
+---
+
+### 2. **What is dependency injection? How is it implemented in .NET Core?**
+
+* Dependency Injection (DI) is a design pattern to inject dependencies into classes rather than creating them internally, promoting loose coupling and easier testing.
+* In .NET Core, DI is built-in. You register services in the `Startup.cs` file’s `ConfigureServices` method using methods like `services.AddSingleton()`, `services.AddScoped()`, or `services.AddTransient()`. These services are then injected into constructors.
+
+---
+
+### 3. **What is middleware in ASP.NET Core?**
+
+* Middleware are components in the HTTP request pipeline that handle requests and responses.
+* Each middleware can perform actions before and after the next middleware executes.
+* Examples: Authentication, routing, error handling middleware. Middleware is configured in `Startup.cs` via the `Configure` method using `app.Use...()` methods.
+
+---
+
+### 4. **How is routing handled in ASP.NET Core MVC?**
+
+* Routing maps URLs to controller actions.
+* ASP.NET Core supports **conventional routing** (defined patterns like `{controller}/{action}/{id?}`) and **attribute routing** (using attributes like `[Route("api/[controller]")]` on controllers or actions).
+* Routing is configured in `Startup.cs` inside the `Configure` method.
+
+---
+
+### 5. **What is Entity Framework Core and how does it work?**
+
+* EF Core is an Object-Relational Mapper (ORM) that enables developers to work with databases using .NET objects instead of SQL queries.
+* It maps your classes (entities) to database tables and allows querying/updating data using LINQ.
+* It supports migrations to evolve the database schema as your models change.
+
+---
+
+### 6. **What is the difference between eager, lazy, and explicit loading in EF Core?**
+
+* **Eager Loading**: Loads related data along with the main entity in a single query using `.Include()`.
+* **Lazy Loading**: Loads related data only when you access the navigation property. Requires enabling proxies.
+* **Explicit Loading**: Manually loads related data by calling `.Load()` on the navigation property after the main entity is retrieved.
+
+---
+
+### 7. **How do you implement authentication and authorization in ASP.NET Core?**
+
+* **Authentication** verifies user identity (e.g., cookie-based, JWT tokens, OAuth).
+* **Authorization** controls access to resources based on roles, claims, or policies.
+* Implemented using middleware, `[Authorize]` attribute, and configuring schemes in `Startup.cs`.
+
+---
+
+### 8. **What are the differences between ViewBag, ViewData, and TempData?**
+
+* **ViewData**: A dictionary for passing data from controller to view; data lasts for a single request.
+* **ViewBag**: A dynamic wrapper around ViewData, provides simpler syntax.
+* **TempData**: Stores data that persists across redirects (multiple requests); usually implemented using session.
+
+---
+
+### 9. **What is model binding and validation in MVC?**
+
+* **Model binding** automatically maps HTTP request data (form fields, query strings) to action method parameters or model properties.
+* **Validation** uses data annotations (e.g., `[Required]`, `[Range]`) on models to enforce rules. The framework validates incoming data and sends validation errors to views.
+
+---
+
+### 10. **How do you handle exceptions globally in ASP.NET Core?**
+
+* Use **middleware** like `app.UseExceptionHandler()` in `Startup.cs` to catch unhandled exceptions globally and show custom error pages or JSON responses.
+* For API projects, you can use exception filters or custom middleware for structured error handling and logging.
+
+---
+
+If you want, I can provide **code snippets** or **more detailed explanations** on any question. Just ask!
+
