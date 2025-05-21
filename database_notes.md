@@ -168,3 +168,87 @@ FETCH NEXT @PageSize ROWS ONLY;
 
 If you want, I can help prepare detailed answers or examples for any question!
 
+---
+Sure! Here's how you can **find the second or third highest salary in SQL Server**, using different methods:
+
+---
+
+## ✅ 1. **Using `OFFSET-FETCH` with `ORDER BY`**
+
+### 🔹 Second Highest Salary:
+
+```sql
+SELECT DISTINCT Salary
+FROM Employees
+ORDER BY Salary DESC
+OFFSET 1 ROW FETCH NEXT 1 ROW ONLY;
+```
+
+### 🔹 Third Highest Salary:
+
+```sql
+SELECT DISTINCT Salary
+FROM Employees
+ORDER BY Salary DESC
+OFFSET 2 ROWS FETCH NEXT 1 ROW ONLY;
+```
+
+> ✅ Note: `OFFSET` starts from `0`, so `OFFSET 1` skips the first (highest) salary.
+
+---
+
+## ✅ 2. **Using Subqueries**
+
+### 🔹 Second Highest Salary:
+
+```sql
+SELECT MAX(Salary) AS SecondHighest
+FROM Employees
+WHERE Salary < (SELECT MAX(Salary) FROM Employees);
+```
+
+### 🔹 Third Highest Salary:
+
+```sql
+SELECT MAX(Salary) AS ThirdHighest
+FROM Employees
+WHERE Salary < (
+    SELECT MAX(Salary)
+    FROM Employees
+    WHERE Salary < (SELECT MAX(Salary) FROM Employees)
+);
+```
+
+---
+
+## ✅ 3. **Using `DENSE_RANK()` (Best for Ties and More Control)**
+
+### 🔹 Second Highest Salary:
+
+```sql
+WITH SalaryRanks AS (
+    SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS SalaryRank
+    FROM Employees
+)
+SELECT Salary
+FROM SalaryRanks
+WHERE SalaryRank = 2;
+```
+
+### 🔹 Third Highest Salary:
+
+```sql
+WITH SalaryRanks AS (
+    SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS SalaryRank
+    FROM Employees
+)
+SELECT Salary
+FROM SalaryRanks
+WHERE SalaryRank = 3;
+```
+
+---
+
+Let me know if your table has a different name or structure (like employee name, department, etc.) — I can customize the queries accordingly.
+
+
