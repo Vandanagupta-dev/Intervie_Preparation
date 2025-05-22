@@ -251,4 +251,146 @@ WHERE SalaryRank = 3;
 
 Let me know if your table has a different name or structure (like employee name, department, etc.) — I can customize the queries accordingly.
 
+---Sure! Here's a collection of **common SQL commands** with **syntax examples** for each category:
+
+---
+
+### 🔹 1. **Data Definition Language (DDL)**
+
+```sql
+-- Create a table
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Salary DECIMAL(10,2),
+    DepartmentID INT
+);
+
+-- Alter a table (add a column)
+ALTER TABLE Employees ADD Email VARCHAR(100);
+
+-- Drop a table
+DROP TABLE Employees;
+
+-- Truncate a table (delete all rows, but keeps structure)
+TRUNCATE TABLE Employees;
+
+-- Rename a table (syntax may vary by DBMS)
+ALTER TABLE Employees RENAME TO Staff;
+```
+
+---
+
+### 🔹 2. **Data Manipulation Language (DML)**
+
+```sql
+-- Insert a new row
+INSERT INTO Employees (EmployeeID, Name, Salary, DepartmentID)
+VALUES (1, 'John Doe', 50000.00, 2);
+
+-- Update existing data
+UPDATE Employees
+SET Salary = 55000.00
+WHERE EmployeeID = 1;
+
+-- Delete specific data
+DELETE FROM Employees
+WHERE EmployeeID = 1;
+```
+
+---
+
+### 🔹 3. **Data Query Language (DQL)**
+
+```sql
+-- Select all columns
+SELECT * FROM Employees;
+
+-- Select specific columns with condition
+SELECT Name, Salary FROM Employees
+WHERE DepartmentID = 2;
+```
+
+---
+
+### 🔹 4. **Transaction Control Language (TCL)**
+
+```sql
+BEGIN TRANSACTION;
+
+-- Sample DML operations
+UPDATE Employees SET Salary = 60000 WHERE EmployeeID = 2;
+
+-- Commit the changes
+COMMIT;
+
+-- Or rollback if something goes wrong
+ROLLBACK;
+```
+
+---
+
+### 🔹 5. **Data Control Language (DCL)**
+
+```sql
+-- Grant privileges
+GRANT SELECT, INSERT ON Employees TO User1;
+
+-- Revoke privileges
+REVOKE INSERT ON Employees FROM User1;
+```
+
+---
+
+### 🔹 6. **Joins and Advanced Queries**
+
+```sql
+-- INNER JOIN
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+-- LEFT JOIN
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+LEFT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+-- Aggregate functions with GROUP BY
+SELECT DepartmentID, AVG(Salary) AS AvgSalary
+FROM Employees
+GROUP BY DepartmentID
+HAVING AVG(Salary) > 50000;
+```
+
+---
+
+### 🔹 7. **Other Useful Clauses**
+
+```sql
+-- ORDER BY
+SELECT Name, Salary FROM Employees
+ORDER BY Salary DESC;
+
+-- LIKE
+SELECT * FROM Employees
+WHERE Name LIKE 'J%';
+
+-- IN
+SELECT * FROM Employees
+WHERE DepartmentID IN (1, 2, 3);
+
+-- BETWEEN
+SELECT * FROM Employees
+WHERE Salary BETWEEN 40000 AND 60000;
+
+-- LIMIT (MySQL/PostgreSQL) / TOP (SQL Server)
+SELECT * FROM Employees
+LIMIT 5;
+
+SELECT TOP 5 * FROM Employees;
+```
+
+---
+
+Would you like a PDF or cheat sheet version of this? Or examples based on a specific table?
 
