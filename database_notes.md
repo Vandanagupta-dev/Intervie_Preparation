@@ -504,6 +504,14 @@ SELECT
     dbo.GetAnnualSalary(MonthlySalary) AS AnnualSalary
 FROM 
     Employees;
+---
+SELECT 
+    ProductName,
+    Price,
+    dbo.CalculateGST(Price) AS GST_18,
+    Price + dbo.CalculateGST(Price) AS FinalPrice
+FROM 
+    Products;
 
 
 
