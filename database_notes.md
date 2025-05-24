@@ -496,6 +496,14 @@ END
 
 ---
 
-Aap chaho to main iska **summary PDF**, ya interview ke liye **SQL function-based Q\&A sheet** bhi bana sakta hoon. Batao kya chahiye?
+🔸 Table ke data ke sath:
+
+SELECT 
+    EmpName,
+    MonthlySalary,
+    dbo.GetAnnualSalary(MonthlySalary) AS AnnualSalary
+FROM 
+    Employees;
+
 
 
