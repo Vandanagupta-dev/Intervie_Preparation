@@ -1,1 +1,87 @@
+Here’s a clear and concise explanation of the **OOPs (Object-Oriented Programming) concepts** with their **differences and purposes**, suitable for **interview preparation**:
+
+---
+
+### ✅ 1. **Class vs Object**
+
+| Feature        | Class                           | Object                            |
+| -------------- | ------------------------------- | --------------------------------- |
+| **Definition** | Blueprint or template           | Instance of a class               |
+| **Purpose**    | Defines properties and behavior | Used to perform actual operations |
+| **Example**    | `Car` (class)                   | `myCar = new Car()` (object)      |
+
+---
+
+### ✅ 2. **Encapsulation vs Abstraction**
+
+| Feature        | Encapsulation                                       | Abstraction                                                        |
+| -------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
+| **Definition** | Binding data and methods into a single unit (class) | Hiding internal implementation and showing only essential features |
+| **Purpose**    | Protects data from unauthorized access              | Simplifies complexity                                              |
+| **Example**    | Private variables + public getters/setters          | Abstract class or interface                                        |
+
+---
+
+### ✅ 3. **Inheritance vs Polymorphism**
+
+| Feature        | Inheritance                                        | Polymorphism                                     |
+| -------------- | -------------------------------------------------- | ------------------------------------------------ |
+| **Definition** | One class inherits fields and methods from another | One interface, multiple implementations          |
+| **Purpose**    | Code reusability                                   | Flexibility and dynamic behavior                 |
+| **Types**      | Single, Multilevel, Hierarchical                   | Compile-time (overloading), Runtime (overriding) |
+| **Example**    | `class Dog : Animal`                               | `speak()` behaves differently for `Dog`, `Cat`   |
+
+---
+
+### ✅ 4. **Compile-Time vs Run-Time Polymorphism**
+
+| Feature          | Compile-Time                            | Run-Time                                         |
+| ---------------- | --------------------------------------- | ------------------------------------------------ |
+| **Also Called**  | Method Overloading                      | Method Overriding                                |
+| **Binding Time** | Early (at compile time)                 | Late (at runtime)                                |
+| **Example**      | `Add(int, int)` and `Add(float, float)` | `Draw()` method overridden in `Circle`, `Square` |
+
+---
+
+### ✅ 5. **Abstract Class vs Interface**
+
+| Feature         | Abstract Class                  | Interface                               |
+| --------------- | ------------------------------- | --------------------------------------- |
+| **Purpose**     | Partial abstraction             | Full abstraction                        |
+| **Contains**    | Abstract + non-abstract members | Only abstract (in older versions)       |
+| **Inheritance** | Supports constructor and fields | No constructors; only method signatures |
+| **Use Case**    | "Is-a" relationship             | "Can-do" capability                     |
+| **Example**     | `abstract class Vehicle`        | `interface IDriveable`                  |
+
+---
+
+### ✅ 6. **Overloading vs Overriding**
+
+| Feature               | Overloading                            | Overriding                                          |
+| --------------------- | -------------------------------------- | --------------------------------------------------- |
+| **Definition**        | Same method name, different parameters | Same method name and parameters, different behavior |
+| **Occurs In**         | Same class                             | Derived class                                       |
+| **Polymorphism Type** | Compile-time                           | Runtime                                             |
+
+---
+
+### ✅ 7. **Constructor vs Method**
+
+| Feature       | Constructor           | Method               |
+| ------------- | --------------------- | -------------------- |
+| **Purpose**   | Initializes an object | Performs action      |
+| **Call Time** | Automatically called  | Explicitly called    |
+| **Name**      | Same as class name    | Any valid identifier |
+
+---
+
+### Purpose of OOP Concepts in Interviews:
+
+* Demonstrate **structured thinking** and **problem-solving** ability.
+* Show understanding of **code reusability**, **scalability**, and **maintainability**.
+* Important in both **design** and **coding rounds**.
+
+---
+
+Let me know if you'd like this as a **PDF cheat sheet**, or if you want **real interview questions based on these**!
 
