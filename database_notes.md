@@ -664,7 +664,58 @@ Change log या history version बनाने के लिए।
 > *“Sir, Trigger तब use करते हैं जब हमें data change hone par automatically kuch logic run karna हो — जैसे audit logs maintain करना, rules enforce करना, data sync करना, ya invalid actions से रोकना। ये behind-the-scenes automation provide करता है और manual errors को रोकता है.”*
 
 ---
+Great question! Let's break down why `NVARCHAR` is used instead of `VARCHAR`, and why `PhoneNumber` is stored as a `NVARCHAR(15)` instead of `INT`.
 
-अगर आप चाहें तो मैं आपको एक पूरा practical SQL demo बना कर दे सकता हूँ — जिसमें trigger के साथ table, audit log, और test data भी होगा। बताइए कौनसे scenario पर चाहिए?
+---
 
+### 🔹 1. `NVARCHAR` vs `VARCHAR`
+
+#### ✅ Why `NVARCHAR`?
+
+* `NVARCHAR` (National Variable Character) supports **Unicode** characters.
+* This means it can store **characters from all languages**: English, Hindi, Chinese, Arabic, etc.
+* It is a **best practice** when you expect to support multiple languages, especially for names or addresses.
+
+#### Example:
+
+If someone enters a name like `"张伟"` or `"संदीप"`, `VARCHAR` will **fail to store it correctly**, but `NVARCHAR` will **preserve it**.
+
+> 🟡 So for `FullName`, `Email`, `Department` — using `NVARCHAR` ensures better compatibility and future-proofing.
+
+---
+
+### 🔹 2. Why not store `PhoneNumber` as `INT`?
+
+#### 🚫 `INT` is not suitable for phone numbers because:
+
+1. **Leading Zeros Will Be Lost**
+   E.g., `0801234567` → stored as `801234567` in `INT`.
+
+2. **Phone Numbers Are Not Numbers for Math**
+   You will never add, subtract, or calculate with phone numbers. They are more like **identifiers** than actual numbers.
+
+3. **International Codes / Special Characters**
+   E.g., `+91-9876543210` or `(123) 456-7890` cannot be stored in an `INT`.
+
+#### ✅ Correct Choice:
+
+* `NVARCHAR(15)` or `VARCHAR(15)` is perfect for phone numbers.
+* It keeps formatting and works internationally.
+
+---
+
+### ✅ Summary:
+
+| Field         | Chosen Type     | Reason                                                               |
+| ------------- | --------------- | -------------------------------------------------------------------- |
+| `FullName`    | `NVARCHAR(100)` | Supports names in any language (Unicode)                             |
+| `Email`       | `NVARCHAR(100)` | Emails may contain international characters                          |
+| `PhoneNumber` | `NVARCHAR(15)`  | Stores formatting, supports `+`, `-`, and avoids integer limitations |
+| `Department`  | `NVARCHAR(100)` | Allows department names in multiple languages                        |
+
+---
+
+If your application will **only support English** and **ASCII characters**, then `VARCHAR` is fine too — it’s a little faster and uses less storage. But using `NVARCHAR` is a safer default.
+
+Let me know if you want to convert these types to `VARCHAR` for English-only use!
 
