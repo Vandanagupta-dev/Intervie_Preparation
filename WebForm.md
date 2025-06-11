@@ -1,3 +1,66 @@
+यहाँ सभी टूल्स और फ्रेमवर्क्स की **Latest Stable Versions (as of June 2025)** दी गई हैं:
+
+---
+
+## ✅ **Latest Versions (June 2025)**
+
+| Technology                  | Latest Stable Version          | Release Notes / Comments                                                          |
+| --------------------------- | ------------------------------ | --------------------------------------------------------------------------------- |
+| **.NET (Core + Framework)** | **.NET 8** (LTS)               | Released in Nov 2023, unified platform (ASP.NET Core, MAUI, Blazor, etc.)         |
+| **ASP.NET MVC (Core)**      | **ASP.NET Core MVC 8**         | Part of .NET 8                                                                    |
+| **ASP.NET Web Forms**       | **.NET Framework 4.8.1**       | Web Forms is not available in .NET Core/.NET 5+; only supported in .NET Framework |
+| **C# Language**             | **C# 12**                      | Released with .NET 8                                                              |
+| **Visual Studio**           | **Visual Studio 2022 (v17.9)** | Next version (VS 2025) is in preview                                              |
+
+---
+
+## 🔹 Details:
+
+### 🔸 .NET (Core + Framework):
+
+* `.NET 8` is the latest **Long-Term Support (LTS)** version.
+* **.NET 9** is expected in **Nov 2024**, but it will be **Current (non-LTS)**.
+
+### 🔸 ASP.NET Web Forms:
+
+* Still available only in **.NET Framework 4.8.1**
+* **Not supported** in .NET 5, .NET 6, .NET 7, or .NET 8
+* Maintained only for legacy apps
+
+### 🔸 ASP.NET Core MVC:
+
+* Latest version: **ASP.NET Core 8**
+* It supports Razor Pages, Controllers, Web API, Blazor (all part of ASP.NET Core now)
+
+### 🔸 C#:
+
+* Latest version: **C# 12**
+* New features include:
+
+  * Primary constructors for classes
+  * Using aliases for any type
+  * Default lambda parameters
+  * Collection expressions
+
+---
+
+## 🔹 Recommendations (2025):
+
+| Scenario                   | Suggested Version                     |
+| -------------------------- | ------------------------------------- |
+| New web app                | .NET 8 + ASP.NET Core MVC / Blazor    |
+| Existing Web Forms project | Stay on .NET Framework 4.8.1          |
+| Upgrade from Web Forms     | Migrate to ASP.NET Core MVC or Blazor |
+| Language features          | Use C# 12 for .NET 8 projects         |
+
+---
+
+अगर आप चाहें तो मैं .NET 8 और C# 12 पर एक छोटा demo project (MVC या Blazor) बना कर दे सकता हूँ। बताइए आपको कौन सा चाहिए?
+
+
+
+
+
 यहाँ पर ASP.NET **Web Forms** से संबंधित कुछ **महत्वपूर्ण Interview Questions with Answers** दिए गए हैं, जो Fresher और Experience दोनों लेवल पर पूछे जा सकते हैं:
 
 ---
