@@ -402,3 +402,76 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
    ```
 
 > **नोट:** `IdentityDbContext` ASP.NET Core Identity का **हार्ट** है। ये सभी इन्फ्रास्ट्रक्चर प्रोवाइड करता है जिससे आपको यूजर मैनेजमेंट के लिए मैन्युअल कोड नहीं लिखना पड़ता।
+
+---
+### Differences Between `AddIdentity` and `AddIdentityCore` in ASP.NET Core Identity  
+
+ASP.NET Core Identity provides two primary methods for registering identity services: **`AddIdentity`** and **`AddIdentityCore`**. While both integrate identity features into the dependency injection container, they serve distinct purposes and cater to different application architectures. Below is a structured comparison:  
+
+---
+
+#### **`AddIdentity`**  
+- **Purpose**:  
+  Adds the **full identity system**, including UI support, cookie-based authentication, and user/role management.  
+- **Services Registered**:  
+  - `UserManager<TUser>`  
+  - `RoleManager<TRole>`  
+  - `SignInManager<TUser>` (handles authentication cookies)  
+  - `IUserStore<TUser>`, `IRoleStore<TRole>`  
+  - Cookie authentication (e.g., `AddAuthentication().AddCookie()`)  
+  - Identity-related services for views (e.g., email sender, token generators).  
+- **Use Cases**:  
+  - Traditional MVC applications with Razor Pages/views for login, registration, and user management.  
+  - Apps requiring built-in UI, cookie authentication, and ready-to-use identity workflows.  
+- **Typical Setup**:  
+  ```csharp
+  services.AddIdentity<IdentityUser, IdentityRole>()
+          .AddEntityFrameworkStores<ApplicationDbContext>()
+          .AddDefaultTokenProviders();
+  ```
+
+---
+
+#### **`AddIdentityCore`**  
+- **Purpose**:  
+  Adds **minimal core services** for user management only, **excluding** authentication, cookies, roles, and UI.  
+- **Services Registered**:  
+  - `UserManager<TUser>` (core user operations)  
+  - `IUserStore<TUser>`  
+  - Password validators, hashers, and basic user management.  
+  - ⚠️ **Excludes**: `SignInManager`, `RoleManager`, cookie auth, and UI-related services.  
+- **Use Cases**:  
+  - APIs (e.g., Web API projects using token-based auth like JWT).  
+  - Custom authentication flows (e.g., OAuth, OpenID Connect).  
+  - Apps where roles, cookies, or built-in UI are unnecessary.  
+- **Typical Setup**:  
+  ```csharp
+  services.AddIdentityCore<IdentityUser>()
+          .AddEntityFrameworkStores<ApplicationDbContext>()
+          .AddUserManager<UserManager<IdentityUser>>();
+  // Requires manual auth setup (e.g., JWT):
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)...;
+  ```
+
+---
+
+### Key Comparison  
+| Feature                | `AddIdentity`                          | `AddIdentityCore`               |  
+|------------------------|----------------------------------------|---------------------------------|  
+| **User Management**    | ✅ Includes `UserManager`              | ✅ Includes `UserManager`       |  
+| **Role Management**    | ✅ Includes `RoleManager`              | ❌ Excluded (add via `AddRoles`) |  
+| **Authentication**     | ✅ Cookie-based (with `SignInManager`) | ❌ Requires manual setup         |  
+| **Built-in UI Support**| ✅ Yes (e.g., Razor Pages)             | ❌ No                           |  
+| **Ideal For**          | MVC/Razor Pages apps                   | APIs/custom auth flows          |  
+
+---
+
+### When to Use Which?  
+- Use **`AddIdentity`** for:  
+  Traditional web apps (MVC/Razor Pages) needing **out-of-the-box login/registration UI** and cookie auth.  
+- Use **`AddIdentityCore`** for:  
+  **API-centric apps** (SPAs, mobile backends) or **custom auth implementations** (e.g., JWT, OAuth) where you manage authentication independently.  
+
+> 💡 **Note**: With `AddIdentityCore`, you can optionally add roles using `.AddRoles<TRole>()` and manually configure authentication (e.g., JWT).  
+
+For deeper implementation details (e.g., configuring identity tables), refer to the [ASP.NET Core Identity documentation](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity).
