@@ -275,3 +275,130 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
    स्पेसिफिक पेजेस को जनरेट करके उन्हें मॉडिफ़ाई करें
 
 > **नोट:** ये चारों पैकेज ASP.NET Core Identity के लिए कोर फाउंडेशन हैं। इनके बिना आप प्रॉपर ऑथेंटिकेशन/ऑथराइज़ेशन सिस्टम नहीं बना सकते।
+
+---
+### Step 3: डेटाबेस कॉन्टेक्स्ट क्लास डिफाइन करना (Define Database Context Class)
+
+#### 1. **IdentityDbContext क्या है?**
+- ASP.NET Core Identity का **कोर कम्पोनेंट** जो EF Core के साथ इंटीग्रेट करता है
+- `DbContext` क्लास से इनहेरिट होता है
+- यूजर, रोल्स, क्लेम्स जैसी आइडेंटिटी एंटिटीज को मैनेज करता है
+
+#### 2. **क्यों जरूरी है?**
+- **ऑटोमैटिक टेबल क्रिएशन**: IdentityDbContext के अंदर पहले से डिफाइंड हैं:
+  ```csharp
+  DbSet<IdentityUser> Users { get; set; }
+  DbSet<IdentityRole> Roles { get; set; }
+  DbSet<IdentityUserClaim> UserClaims { get; set; }
+  // और भी एंटिटीज...
+  ```
+- **रिलेशनशिप मैनेजमेंट**: यूजर-रोल्स के बीच के रिलेशन्स को हैंडल करता है
+- **कस्टमाइजेशन**: अपनी एप्लीकेशन के हिसाब से एक्सटेंड किया जा सकता है
+
+#### 3. **इम्प्लीमेंटेशन स्टेप्स**
+**Models फोल्डर में ApplicationDbContext.cs फाइल बनाएं:**
+```csharp
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace YourProjectName.Models
+{
+    // IdentityDbContext को इनहेरिट करें
+    public class ApplicationDbContext : IdentityDbContext
+    {
+        // कंस्ट्रक्टर: ऑप्शन्स को बेस क्लास में पास करें
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        // ऑप्शनल: कस्टम DbSet ऐड करें
+        // public DbSet<YourCustomModel> CustomModels { get; set; }
+
+        // ऑप्शनल: मॉडल कॉन्फिगरेशन ओवरराइड करें
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            
+            // कस्टम कॉन्फिगरेशन यहाँ ऐड करें
+            // builder.Entity<YourCustomModel>().Property(...)
+        }
+    }
+}
+```
+
+#### 4. **IdentityDbContext के अंदर क्या है?**
+ये टेबल्स ऑटोमैटिक बनेंगी:
+| टेबल नाम               | डिस्क्रिप्शन                          |
+|-------------------------|----------------------------------------|
+| `AspNetUsers`           | यूजर्स की बेसिक इन्फो                 |
+| `AspNetRoles`           | रोल्स (Admin, User आदि)              |
+| `AspNetUserRoles`       | यूजर और रोल्स के बीच मैपिंग          |
+| `AspNetUserClaims`      | यूजर के क्लेम्स (Key-Value पेयर्स)  |
+| `AspNetUserLogins`      | एक्सटर्नल लॉगिन प्रोवाइडर्स          |
+| `AspNetUserTokens`      | ऑथेंटिकेशन टोकन्स                    |
+
+#### 5. **कस्टम यूजर क्लास के साथ यूज़ करना**
+अगर डिफॉल्ट `IdentityUser` से एक्सट्रा फील्ड्स चाहिए:
+```csharp
+public class ApplicationUser : IdentityUser
+{
+    public string FullName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    // अपनी कस्टम प्रॉपर्टीज ऐड करें
+}
+
+// कॉन्टेक्स्ट को अपडेट करें
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+{
+    // बाकी कोड समान रहेगा
+}
+```
+
+#### 6. **Program.cs में रजिस्टर करें**
+```csharp
+using Microsoft.EntityFrameworkCore;
+using YourProjectName.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// डेटाबेस कॉन्फिगरेशन
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Identity कॉन्फिगरेशन
+builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+```
+
+#### 7. **कॉमन एरर और सॉल्यूशन**
+1. **"No database provider has been configured"**:
+   - सॉल्यूशन: `AddDbContext` में `UseSqlServer()` कॉल करें
+
+2. **माइग्रेशन एप्लाई नहीं हो रहा**:
+   ```bash
+   dotnet ef migrations add InitialIdentitySetup
+   dotnet ef database update
+   ```
+
+3. **कस्टम यूजर क्लास नहीं दिख रही**:
+   - सुनिश्चित करें कि `AddDefaultIdentity<ApplicationUser>` यूज़ कर रहे हैं
+
+#### 8. **बेस्ट प्रैक्टिसेज़**
+1. **सेपरेट प्रोजेक्ट**: कॉन्टेक्स्ट क्लास को `Data` नाम के अलग फोल्डर में रखें
+2. **ऑनमॉडलक्रिएटिंग**: कॉन्फिगरेशन को साफ़ रखने के लिए
+   ```csharp
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+   {
+       modelBuilder.Entity<IdentityUser>().Property(u => u.Email).IsRequired();
+       base.OnModelCreating(modelBuilder);
+   }
+   ```
+3. **SQLite फॉर डेवलपमेंट**: टेस्टिंग के लिए हल्का डेटाबेस
+   ```csharp
+   options.UseSqlite("Data Source=mydb.db");
+   ```
+
+> **नोट:** `IdentityDbContext` ASP.NET Core Identity का **हार्ट** है। ये सभी इन्फ्रास्ट्रक्चर प्रोवाइड करता है जिससे आपको यूजर मैनेजमेंट के लिए मैन्युअल कोड नहीं लिखना पड़ता।
