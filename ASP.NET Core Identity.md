@@ -763,7 +763,113 @@ ASP.NET Core Identity tables आपके एप्लिकेशन में 
 ✅ कोड उदाहरण दे सकता हूँ custom IdentityUser बनाने का।
 ✅ Migration और update DB के exact commands बता सकता हूँ।
 
-बताइए कैसे आगे बढ़ना चाहेंगे? 😊
+----
+बहुत बढ़िया! आपने **Custom Password Policy in ASP.NET Core Identity** का concept detail में share किया है। चलिए मैं इसे **short, clear और practical तरीके से** explain करता हूँ ताकि आप इसको अपने project में आसानी से implement कर पाएं।
+
+---
+
+## 🚀 **Default Password Policy in ASP.NET Core Identity**
+
+ASP.NET Core Identity की default policy यह होती है:
+
+* ✅ Minimum 6 characters
+* ✅ कम से कम 1 digit (0-9)
+* ✅ कम से कम 1 lowercase letter (a-z)
+* ✅ कम से कम 1 uppercase letter (A-Z)
+* ✅ कम से कम 1 non-alphanumeric character (जैसे !@#)
+* ✅ 1 unique character minimum
+
+👉 यह policy `PasswordOptions` class से आती है।
+
+---
+
+## 🔑 **Custom Password Policy Example**
+
+मान लीजिए आप चाहते हैं:
+
+* Minimum **8 characters**
+* कम से कम 1 digit
+* कम से कम 1 uppercase
+* कम से कम 1 lowercase
+* कम से कम 1 non-alphanumeric
+* Minimum 4 unique characters
+
+### **Program.cs में ऐसा code होगा:**
+
+```csharp
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequiredUniqueChars = 4;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
+```
+
+👉 इससे आपकी custom policy enable हो जाएगी।
+
+---
+
+## 🎯 **Where to place this?**
+
+👉 यह code आपके `Program.cs` में होगा जहां आप Identity configure करते हैं।
+
+उदाहरण:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+// Add Identity
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequiredUniqueChars = 4;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+var app = builder.Build();
+```
+
+---
+
+## 💡 **Custom password policy कब करें?**
+
+👉 जब आपके app में:
+
+* High security की जरूरत हो (e.g. banking, healthcare)
+* आपको compliance meet करनी हो (e.g. HIPAA, PCI DSS)
+* आपका business कोई specific password rule enforce करना चाहता हो
+
+---
+
+## ✅ **Test कैसे करें?**
+
+1️⃣ Run app
+2️⃣ Register user → Try password `1122` → error आएगा
+3️⃣ Try password `Abcd@#1234` → success
+
+---
+
+## ✉ **Summary**
+
+➡ ASP.NET Core Identity में custom password policy set करना simple है।
+➡ बस `AddIdentity` options में `PasswordOptions` को override करना होता है।
+➡ यह user accounts को Brute Force जैसे attacks से बचाता है।
+
+---
+
+अगर चाहें तो मैं आपको पूरा example project structure, database migration steps, या UI validation message example भी बना सकता हूँ। बताएं! 😊
+
 
 
 
