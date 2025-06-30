@@ -867,8 +867,90 @@ var app = builder.Build();
 ➡ यह user accounts को Brute Force जैसे attacks से बचाता है।
 
 ---
+Bahut badhiya sawal hai! Main **\[AllowAnonymous]** aur **\[Authorize]** ke use ko simple aur **Hinglish** me samjhata hoon, taaki aapko clear ho jaye ki ye attributes kyu lagate hain aur kya kaam karte hain:
 
-अगर चाहें तो मैं आपको पूरा example project structure, database migration steps, या UI validation message example भी बना सकता हूँ। बताएं! 😊
+---
+
+### ✅ **\[Authorize] ka use**
+
+👉 Jab aap chahte ho ki **sirf logged-in (authenticated) user hi kisi controller ya action ko access kar sake**, tab aap **\[Authorize]** lagate ho.
+
+📌 **Example:**
+
+```csharp
+[Authorize]
+public IActionResult Privacy()
+{
+    return View();
+}
+```
+
+👉 Iska matlab:
+➡ Privacy page par **sirf login kiya hua user** hi ja sakta hai.
+➡ Agar user login nahi kiya hoga toh wo page access karne ki koshish karega toh **Login page par redirect ho jayega**.
+
+📌 **Kahan lagate hain?**
+
+* Controller pe: pura controller secure ho jata hai
+* Action method pe: sirf specific method secure hota hai
+
+---
+
+### ✅ **\[AllowAnonymous] ka use**
+
+👉 Jab aap chahte ho ki **koi action ya controller sabhi ke liye open ho**, chahe user login kiya ho ya na kiya ho, tab aap **\[AllowAnonymous]** lagate ho.
+
+📌 **Example:**
+
+```csharp
+[AllowAnonymous]
+public IActionResult Index()
+{
+    return View();
+}
+```
+
+👉 Iska matlab:
+➡ **Sabhi log (anonymous + logged-in)** is page ko dekh sakte hain.
+➡ Iske liye login ki zarurat nahi hoti.
+
+📌 **Kab lagate hain?**
+
+* Jab aapka controller pe \[Authorize] laga ho aur kisi ek method ko public rakhna ho (jaise Login, Register page).
+
+---
+
+### 💡 **Ek simple example dono ka ek saath:**
+
+```csharp
+[Authorize]
+public class HomeController : Controller
+{
+    public IActionResult Privacy() => View();  // Sirf logged-in user ke liye
+
+    [AllowAnonymous]
+    public IActionResult Index() => View();    // Sabhi ke liye open
+}
+```
+
+👉 **Is case me:**
+
+* `Privacy()` secure hai → login jaruri hai.
+* `Index()` sab dekh sakte hain → login ki zarurat nahi.
+
+---
+
+### 🔑 **Summary**
+
+| Attribute             | Purpose                                                 |
+| --------------------- | ------------------------------------------------------- |
+| **\[Authorize]**      | Sirf login kiya hua user access kar sakta hai           |
+| **\[AllowAnonymous]** | Sabhi access kar sakte hain, login ki zarurat nahi hoti |
+
+---
+
+Agar chaho toh main iska **diagram** ya ek **practical demo code** bhi bana sakta hoon. Batayein? 🚀
+
 
 
 
