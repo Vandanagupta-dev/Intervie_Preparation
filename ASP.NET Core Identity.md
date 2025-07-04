@@ -1071,7 +1071,144 @@ public class HomeController : Controller
 
 ---
 
-Agar chaaho toh main ek **practical working example** ka code bana ke de sakti hoon jisme role creation, user assign, aur authorize attributes ka use ho. Batao! 😊
+Bilkul! Chaliye **"Show or Hide Navigation Menus Based on User Role in ASP.NET Core Identity"** ko *Hinglish* mein simple aur clear tarike se samjhate hain.
+
+---
+
+## 🌟 **Objective**
+
+ASP.NET Core app mein hum chahte hain ki:
+👉 Jo user **Admin role** ka hai usko *Admin menus* dikhayein (jaise "Manage Roles").
+👉 Jo normal **User role** ka hai usko normal menus dikhayein.
+👉 Jo user logged-in nahi hai usko login/register dikhayein.
+
+---
+
+## 💡 **Kaise Karein?**
+
+1️⃣ **Roles pehle se app mein hone chahiye (Admin, User, Moderator etc.)**
+2️⃣ Navigation menus ko hum `_Layout.cshtml` file mein dynamically check karenge ki user ka role kya hai.
+
+---
+
+## 🛠 **\_Layout.cshtml ka code example**
+
+```csharp
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+<ul class="navbar-nav">
+    @* Common links *@
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+
+    @* Admin menu *@
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Administration" asp-action="ListRoles">Manage Roles</a>
+        </li>
+    }
+
+    @* User menu *@
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="User" asp-action="Dashboard">User Dashboard</a>
+        </li>
+    }
+
+    @* Login / Logout links *@
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout @User.Identity.Name</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    }
+</ul>
+```
+
+---
+
+## ⚡ **SignInManager & User Methods**
+
+* `SignInManager.IsSignedIn(User)` → check karta hai ki user logged-in hai ya nahi.
+* `User.IsInRole("RoleName")` → check karta hai ki user specific role mein hai ya nahi.
+
+---
+
+## 🔒 **Security Note**
+
+👉 Sirf menu hide karne se security nahi hoti.
+👉 Controller actions pe bhi `[Authorize(Roles="Admin")]` lagana zaroori hai.
+
+---
+
+## ❌ **Access Denied kaise handle karein?**
+
+Agar koi unauthorized user direct URL type kare (jaise `/Administration/ListRoles`) to:
+1️⃣ **Authorize attribute block karega**
+2️⃣ User ko `/Account/AccessDenied` pe redirect kiya jayega.
+
+**AccountController mein action banao:**
+
+```csharp
+[HttpGet]
+[AllowAnonymous]
+public IActionResult AccessDenied()
+{
+    return View();
+}
+```
+
+**AccessDenied.cshtml:**
+
+```html
+<div class="text-center">
+    <h1 class="text-danger">Access Denied</h1>
+    <h6 class="text-danger">You do not have permission to view this resource</h6>
+</div>
+```
+
+---
+
+## ⚙ **Program.cs ya Startup.cs mein path configure karo**
+
+```csharp
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+```
+
+---
+
+## 🎯 **Summary**
+
+✅ Navigation menu ko dynamically dikhana ya chupana hai toh:
+👉 `_Layout.cshtml` mein `IsSignedIn()` aur `IsInRole()` ka use karo.
+👉 Controllers pe bhi `[Authorize(Roles="...")]` lagao.
+👉 Unauthorized access ke liye `AccessDenied` page ready rakho.
+
+---
+
+Agar chaaho toh main ek **working demo project ka structure** ya **ready code** bhi bana kar de sakti hoon. Batao! 😊
 
 
 
