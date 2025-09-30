@@ -472,4 +472,201 @@ public class PaymentProcessor
 
 अगर आप चाहें तो मैं आपको एक छोटा सा `.NET Core MVC` प्रोजेक्ट बना कर भेज सकता हूँ जिसमें यह DI लागू हो। बताइए!
 
+Perfect 👍 You want **ASP.NET Web Forms interview questions (basic to advanced) with answers**.
+I’ll prepare a list that covers all levels so you can **revise quickly** for interviews.
+
+---
+
+## 🔹 Basic Level Web Forms Interview Questions
+
+### 1. **What is ASP.NET Web Forms?**
+
+**Answer:**
+ASP.NET Web Forms is a framework in .NET for building dynamic web pages using a drag-and-drop, event-driven model. It provides a way to create web applications with server-side controls and code-behind files.
+
+---
+
+### 2. **What is the difference between ASP.NET Web Forms and MVC?**
+
+**Answer:**
+
+* **Web Forms:** Event-driven, view state, server controls, tightly coupled UI & logic.
+* **MVC:** Separation of concerns (Model, View, Controller), no view state, HTML helpers, testable, modern.
+
+---
+
+### 3. **What is the use of ViewState in Web Forms?**
+
+**Answer:**
+ViewState maintains the state of controls across postbacks. It is stored in a hidden field on the page in Base64 format.
+
+---
+
+### 4. **What are server-side controls in ASP.NET Web Forms?**
+
+**Answer:**
+Server controls are ASP.NET controls (e.g., `<asp:TextBox>`, `<asp:GridView>`, `<asp:DropDownList>`) that run on the server and generate HTML at runtime.
+
+---
+
+### 5. **What are the different types of state management in ASP.NET Web Forms?**
+
+**Answer:**
+
+* **Client-side:** ViewState, Cookies, QueryString, Hidden fields.
+* **Server-side:** Session, Application, Cache.
+
+---
+
+## 🔹 Intermediate Level Web Forms Questions
+
+### 6. **What is the page life cycle in ASP.NET Web Forms?**
+
+**Answer:**
+Main stages are:
+
+1. **Page_Init** → Initialization of controls.
+2. **Page_Load** → Load control properties, business logic.
+3. **Page_PreRender** → Final changes before rendering.
+4. **Page_Unload** → Cleanup, closing resources.
+
+---
+
+### 7. **What is Postback in ASP.NET Web Forms?**
+
+**Answer:**
+Postback is the process where the page sends data back to the same server page for processing. Example: clicking a button triggers a postback.
+
+---
+
+### 8. **What is the difference between Session and ViewState?**
+
+**Answer:**
+
+* **Session:** Server-side, stores data per user, works across pages.
+* **ViewState:** Client-side, page-specific, works only within the same page.
+
+---
+
+### 9. **What are Master Pages in ASP.NET Web Forms?**
+
+**Answer:**
+Master Pages define a common layout (like header, footer, navigation) that can be shared across multiple pages for consistency.
+
+---
+
+### 10. **What are User Controls vs Custom Controls?**
+
+**Answer:**
+
+* **User Control (`.ascx`):** Reusable control within a project, easier to create.
+* **Custom Control (`.dll`):** Compiled control, can be reused across multiple projects, more flexible.
+
+---
+
+### 11. **What is the difference between Application State and Session State?**
+
+**Answer:**
+
+* **Application State:** Shared across all users, stored at server level.
+* **Session State:** Unique per user session, stored at server or out-of-process.
+
+---
+
+### 12. **How does authentication work in Web Forms?**
+
+**Answer:**
+
+* **Forms Authentication**: Uses login form + cookies.
+* **Windows Authentication**: Uses Active Directory credentials.
+
+---
+
+## 🔹 Advanced Level Web Forms Questions
+
+### 13. **How do you improve performance in ASP.NET Web Forms?**
+
+**Answer:**
+
+* Use **Caching** (OutputCache, DataCache).
+* Minimize ViewState size.
+* Use efficient data binding (`DataReader` over `DataSet` when possible).
+* Use paging in `GridView`.
+* Enable compression and bundling.
+
+---
+
+### 14. **What are HTTP Handlers and HTTP Modules?**
+
+**Answer:**
+
+* **HTTP Handler:** Processes individual HTTP requests (like `.ashx` files). Example: Image handler.
+* **HTTP Module:** Intercepts requests and responses globally (like authentication, logging).
+
+---
+
+### 15. **How do you handle error handling in Web Forms?**
+
+**Answer:**
+
+* **Try-Catch blocks** in code-behind.
+* **Page_Error** event.
+* **Application_Error** in `Global.asax`.
+* **Web.config `<customErrors>`** for user-friendly error pages.
+
+---
+
+### 16. **What is the difference between Server.Transfer and Response.Redirect?**
+
+**Answer:**
+
+* **Server.Transfer:** Redirects to another page on the server **without changing URL** in the browser. Faster.
+* **Response.Redirect:** Redirects to another page by sending a new request to the browser. URL changes. Slower.
+
+---
+
+### 17. **What is the difference between DataSet and DataReader?**
+
+**Answer:**
+
+* **DataSet:** Disconnected, in-memory representation, can hold multiple tables.
+* **DataReader:** Connected, forward-only, fast, read-only access.
+
+---
+
+### 18. **How do you implement security in ASP.NET Web Forms?**
+
+**Answer:**
+
+* Authentication (Forms, Windows, Passport).
+* Authorization (`<authorization>` in Web.config).
+* Role-based security.
+* SSL/HTTPS.
+* SQL injection prevention with parameterized queries.
+
+---
+
+### 19. **What are UpdatePanel and ScriptManager in ASP.NET AJAX?**
+
+**Answer:**
+
+* **ScriptManager:** Manages client-side JavaScript for ASP.NET AJAX.
+* **UpdatePanel:** Allows partial page updates (AJAX) without full postback.
+
+---
+
+### 20. **What is the difference between IsPostBack and !IsPostBack?**
+
+**Answer:**
+
+* **IsPostBack:** `true` if the page is being reloaded due to a postback.
+* **!IsPostBack:** Runs code only on first page load (e.g., binding dropdowns).
+
+---
+
+👉 This covers **basic to advanced** Web Forms questions commonly asked in interviews.
+
+Do you want me to also prepare a **PDF version of these Q&A** so you can **revise offline** before your interview?
+
+
 
