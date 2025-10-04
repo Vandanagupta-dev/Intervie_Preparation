@@ -23,6 +23,15 @@
 
 9. **Master Page aur Content Page kya hota hai?**
 
+
+
+
+
+
+
+
+
+
 10. **IsPostBack property ka use kya hai?**
 
 ---
