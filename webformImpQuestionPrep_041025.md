@@ -504,8 +504,157 @@ Ab main aapko **Advanced Level ASP.NET Web Forms interview questions ke short & 
 
 ---
 
-⚡ Ye answers concise hain aur direct interview ke liye handy rahenge.
+Sure! Vandana 😊 — here’s a **ready-made answer sheet** for your ASP.NET Web Forms Interview Cheatsheet (Basic → Advanced). I’ve added **answers for each point** in a clear, interview-friendly style.
 
-👉 Vandana, kya aap chahte ho mai ek **ASP.NET Web Forms Interview Cheatsheet (Basic + Intermediate + Advanced ek hi PDF)** bana kar de du jise aap revise kar sako before interview?
+---
+
+## **ASP.NET Web Forms Interview Answers**
+
+### **BASIC LEVEL**
+
+1. **ASP.NET Web Forms:**
+   Event-driven framework in ASP.NET for building web applications using **server controls, ViewState, and postback model**. It allows rapid UI development with minimal coding.
+
+2. **WebForms vs MVC:**
+
+   * WebForms: Event-driven, uses ViewState, tightly coupled with UI.
+   * MVC: Model-View-Controller pattern, no ViewState, separation of concerns, better testability.
+
+3. **Page Life Cycle:**
+   Key events:
+   `PreInit → Init → Load → Control Events → PreRender → Unload`
+   Each stage allows specific operations like control creation, data binding, event handling, final rendering.
+
+4. **ViewState:**
+   Preserves the **state of controls across postbacks**.
+   **Limitations:** increases page size and can be a performance overhead; not secure by default.
+
+5. **Server vs HTML Controls:**
+
+   * Server controls: Run on server, support events, integrated with ViewState.
+   * HTML controls: Client-side only, lightweight, no automatic server-side events.
+
+6. **Postback:**
+   The process when a page **submits to the server and reloads**, typically after a control event like button click.
+
+7. **State Management:**
+
+   * **Client-side:** ViewState, Cookies, HiddenField, QueryString
+   * **Server-side:** Session, Cache, Application
+
+8. **Web.config:**
+   Stores application-level settings such as **database connections, authentication, authorization, and custom errors**.
+
+9. **Master & Content Pages:**
+
+   * Master Page: Common layout (header, footer, menu).
+   * Content Page: Page-specific content rendered within the master layout.
+
+10. **IsPostBack:**
+    Boolean property that **checks if the page is loaded due to a postback** or for the first time.
+
+---
+
+### **INTERMEDIATE LEVEL**
+
+1. **Session vs Application State:**
+
+   * Session: Stores per-user data.
+   * Application: Shared global data across all users.
+
+2. **Server.Transfer vs Response.Redirect:**
+
+   * Server.Transfer: Server-side transfer, fast, URL unchanged.
+   * Response.Redirect: Client-side redirect, slower, URL changes.
+
+3. **Caching:**
+
+   * OutputCache: Cache entire page.
+   * DataCache: Cache data objects.
+   * FragmentCache: Cache parts of a page (UserControls).
+
+4. **Global.asax:**
+   Contains **application-level events** such as Application_Start, Session_Start, Application_Error for initializing resources and handling global events.
+
+5. **Page.IsValid:**
+   Returns `true` if **all validation controls pass**. Used after `Page.Validate()` during form submission.
+
+6. **Cross-page posting:**
+   Allows a form to **submit data to another page** using `PostBackUrl`.
+   Example: `<asp:Button PostBackUrl="TargetPage.aspx" />`
+
+7. **Validation Controls:**
+
+   * RequiredFieldValidator
+   * CompareValidator
+   * RangeValidator
+   * RegularExpressionValidator
+   * CustomValidator
+   * ValidationSummary
+
+8. **User Control vs Custom Control:**
+
+   * UserControl (.ascx): Page-specific, easy to create.
+   * Custom Control: Compiled into DLL, reusable across applications.
+
+9. **GridView vs Repeater:**
+
+   * GridView: Rich features like sorting, paging, editing. Heavy control.
+   * Repeater: Lightweight, template-based, flexible layout, faster.
+
+10. **UpdatePanel:**
+    Allows **partial page updates** using AJAX without full page reload. Requires `ScriptManager` on the page.
+
+---
+
+### **ADVANCED LEVEL**
+
+1. **Events & Event Bubbling:**
+   Child control events propagate to **parent controls**.
+   Example: Button click inside GridView → triggers GridView RowCommand event.
+
+2. **Security:**
+   Implement **authentication** (Forms, Windows) and **authorization** (role-based) in `web.config`.
+
+3. **Session Modes:**
+
+   * InProc: Stored in server memory (default).
+   * StateServer: Stored in external Windows service.
+   * SQLServer: Stored in SQL database.
+   * Custom: Developer-defined storage (e.g., Redis).
+
+4. **Disable ViewState:**
+   Improves page performance but **control values will not persist across postbacks**.
+
+5. **Application Pool:**
+   IIS feature that isolates web applications in **separate worker processes** for security and reliability.
+
+6. **Custom Error Handling:**
+
+   * Use `web.config <customErrors>` for HTTP errors.
+   * Use `Application_Error` in `Global.asax` for global exception handling.
+
+7. **HttpHandlers & HttpModules:**
+
+   * HttpHandler: Handles specific request endpoints (e.g., `.ashx`)
+   * HttpModule: Intercepts requests in pipeline for tasks like logging, authentication.
+
+8. **Performance Optimization:**
+
+   * Disable ViewState where unnecessary
+   * Use caching
+   * Implement paging in GridView
+   * Reduce server controls
+   * Use async tasks for long-running operations
+
+9. **Strongly Typed Data Binding:**
+   Use `ItemType` in data controls like ListView to enable **compile-time checking** instead of Eval(), which reduces runtime errors.
+
+10. **PreInit vs Init:**
+
+    * PreInit: Set master page, theme, or dynamically create controls.
+    * Init: Controls initialized, but ViewState not loaded yet.
+
+---
 
 
