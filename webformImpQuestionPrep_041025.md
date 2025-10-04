@@ -357,8 +357,146 @@ if (Page.IsValid)
 ```
 
 ---
+Bahut badhiya 👍
+Ab main aapko **Advanced Level ASP.NET Web Forms interview questions ke short & clear answers** deta hoon — jisme interviewer ko lage ki aapko concepts deeply samajh hain.
 
-⚡ Ye saare answers **direct interview ke liye ready-made** hain — short, point-to-point, aur practical examples ke sath.
+---
 
-👉 Kya aap chahte ho mai **Advanced Level ASP.NET Web Forms interview questions ke bhi full answers** bana kar du?
+## 🔹 Advanced Level Questions with Answers
+
+### 1. **ASP.NET Web Forms me Events kaise kaam karte hain (Event Bubbling)?**
+
+* Web Forms **event-driven model** follow karta hai.
+* Jab ek child control (Button, DropDown) par event fire hota hai to wo **page life cycle ke zariye parent control/page tak bubble** karta hai.
+* Example: `GridView` me button click → pehle button ka event → phir GridView RowCommand event trigger hota hai.
+  👉 Isko hi **Event Bubbling** kehte hain.
+
+---
+
+### 2. **ASP.NET Web Forms me Security kaise implement karte ho (Authentication & Authorization)?**
+
+* **Authentication** → User ka identity check karna (Forms Authentication, Windows Authentication, Passport, Identity provider).
+* **Authorization** → User ko resource access dena/deny karna.
+* Implement in `web.config`:
+
+```xml
+<authentication mode="Forms">
+  <forms loginUrl="Login.aspx" timeout="30" />
+</authentication>
+<authorization>
+  <deny users="?" /> <!-- anonymous users denied -->
+</authorization>
+```
+
+---
+
+### 3. **Session ke modes kaun se hain (InProc, StateServer, SQLServer, Custom)?**
+
+1. **InProc** → Session data server memory me (default, fast but not durable).
+2. **StateServer** → Session ek separate Windows Service me store hota hai (durable across IIS restarts).
+3. **SQLServer** → Session SQL DB me store hota hai (durable, but slower).
+4. **Custom** → Developer apna storage define karta hai (Redis, NoSQL, etc.).
+
+---
+
+### 4. **ViewState disable karne ka impact kya hoga?**
+
+* Page ka size kam ho jayega (fast load).
+* Controls ki values postback ke baad preserve **nahi hongi**.
+* Agar control-specific disable karna ho:
+
+```aspx
+<asp:TextBox ID="txtName" runat="server" EnableViewState="false" />
+```
+
+---
+
+### 5. **Application Pool kya hai aur IIS me iska role kya hai?**
+
+* **Application Pool** ek IIS feature hai jo web apps ko **isolation** provide karta hai.
+* Har app pool ka apna worker process hota hai (w3wp.exe).
+* Agar ek app crash ho jaye to doosri app effect nahi hoti.
+* Role: Security, reliability, resource management.
+
+---
+
+### 6. **ASP.NET Web Forms me Custom Error Handling kaise karte ho?**
+
+* `web.config` me custom error section:
+
+```xml
+<customErrors mode="On">
+   <error statusCode="404" redirect="NotFound.aspx" />
+   <error statusCode="500" redirect="Error.aspx" />
+</customErrors>
+```
+
+* Global.asax → `Application_Error` event me handle karna.
+* Try-catch blocks use karna.
+
+---
+
+### 7. **HttpHandlers aur HttpModules kya hote hain?**
+
+* **HttpHandler** → Request ko handle karta hai aur response generate karta hai (e.g. `.aspx`, `.ashx`).
+
+  * Example: ImageHandler.ashx → dynamically image serve karna.
+
+* **HttpModule** → Request/Response pipeline me hook karke preprocessing ya postprocessing karta hai (e.g. Authentication, Logging).
+
+👉 Difference: Handler = request ka endpoint, Module = request ke beech ka filter.
+
+---
+
+### 8. **WebForms Performance optimization ke liye kya steps loge?**
+
+* ViewState disable where not required.
+* Output Caching / Data Caching use karna.
+* Session ka optimized use (avoid InProc for large apps).
+* Use paging in GridView/Repeater.
+* Minimize server controls, use lightweight controls.
+* Use `async` page model for long-running tasks.
+
+---
+
+### 9. **WebForms me strongly typed data binding kaise hoti hai?**
+
+* Traditional: `<%# Eval("PropertyName") %>` (weakly typed, runtime error prone).
+* Strongly typed (ASP.NET 4.5+):
+
+```aspx
+<ItemTemplate>
+   <%# Item.ProductName %>
+</ItemTemplate>
+```
+
+```aspx
+<asp:ListView runat="server" ItemType="MyApp.Models.Product">
+```
+
+👉 Ye compile-time checking deta hai.
+
+---
+
+### 10. **ASP.NET Page Life Cycle me PreInit aur Init ke beech kya difference hai?**
+
+* **PreInit**
+
+  * Sabse pehla event.
+  * Yahan pe themes, master pages, dynamic controls set karte ho.
+  * Check `IsPostBack` property.
+
+* **Init**
+
+  * Controls initialized hote hain, but unme values (ViewState) abhi load nahi hoti.
+  * Control properties set ki ja sakti hain.
+
+👉 Difference: **PreInit → page-level setup** , **Init → control initialization**.
+
+---
+
+⚡ Ye answers concise hain aur direct interview ke liye handy rahenge.
+
+👉 Vandana, kya aap chahte ho mai ek **ASP.NET Web Forms Interview Cheatsheet (Basic + Intermediate + Advanced ek hi PDF)** bana kar de du jise aap revise kar sako before interview?
+
 
