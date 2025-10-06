@@ -178,6 +178,15 @@ Here `Foo<T>` is a static, generic, partial class only visible inside its own as
 * Under the hood, the compiler rewrites it as a state machine.
 * **Difference**: Threads actually block/wait, whereas async methods free up the thread to do other work (better scalability in I/O‑bound scenarios).
 
+  Normally जब हम कोई time-taking operation (जैसे DB call, file read, API call) run करते हैं तो वो main thread को block कर देता है।
+इससे UI hang होने लगता है और responsiveness कम हो जाती है।
+🔹 2. async / await क्या है?
+
+async → बताता है कि function asynchronous होगा।
+
+await → बताता है कि यहाँ रुकना है जब तक task complete न हो जाए, लेकिन main thread block नहीं होगा।
+
+इससे UI smooth चलता है और heavy operations background में होते हैं।
 ---
 
 ### 3. What are **delegates**, and how do they differ from **events**?
