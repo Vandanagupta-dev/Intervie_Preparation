@@ -286,6 +286,24 @@ await → बताता है कि यहाँ रुकना है ज�
 
   * Mutable buffer: efficient when building up large or dynamic text via multiple `.Append()` calls.
 
+
+🔹 4. कब string और कब StringBuilder use करें?
+
+Use string
+
+जब छोटे strings हों
+
+जब बहुत कम modifications हों (1–2 बार concat/replace)
+
+Example: string fullName = firstName + " " + lastName;
+
+Use StringBuilder
+
+जब बहुत ज्यादा modifications करने हों (loops में)
+
+जब performance critical हो
+
+Example: बड़े reports generate करना, dynamic HTML/JSON बनाना
 ---
 
 ### 9. How do you handle **exceptions** in C#? Any best practices?
