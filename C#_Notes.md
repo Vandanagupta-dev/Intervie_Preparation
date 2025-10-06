@@ -247,12 +247,14 @@ await → बताता है कि यहाँ रुकना है ज�
   * Extends `IEnumerable<T>` with an expression tree.
   * Query provider (e.g. Entity Framework) can translate operations into SQL (deferred execution on the database side).
 🔹 5. Difference (Shortcut Table)
-Feature	IEnumerable<T>	IQueryable<T>
-Namespace	System.Collections.Generic	System.Linq
-Execution	Client-side (in memory)	Server-side (database)
-Data source	Collections (List, Array)	Remote DB, LINQ to SQL, EF
-Performance	कम efficient (पूरा data memory में)	ज्यादा efficient (filter DB में)
-Use case	Small data, in-memory operations	Large data, DB queries, remote fetch
+| Feature     | IEnumerable<T>                      | IQueryable<T>                        |
+| ----------- | ----------------------------------- | ------------------------------------ |
+| Namespace   | System.Collections.Generic          | System.Linq                          |
+| Execution   | Client-side (in memory)             | Server-side (database)               |
+| Data source | Collections (List, Array)           | Remote DB, LINQ to SQL, EF           |
+| Performance | कम efficient (पूरा data memory में) | ज्यादा efficient (filter DB में)     |
+| Use case    | Small data, in-memory operations    | Large data, DB queries, remote fetch |
+
 ---
 
 ### 7. What is **dependency injection** (DI) and how does .NET Core support it?
