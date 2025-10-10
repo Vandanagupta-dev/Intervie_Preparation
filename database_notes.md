@@ -719,3 +719,215 @@ If your application will **only support English** and **ASCII characters**, then
 
 Let me know if you want to convert these types to `VARCHAR` for English-only use!
 
+Sure! I’ll prepare a detailed guide for **SQL interview questions** for someone with **2+ years of experience**, covering **Indexing, Views, CTEs, Normalization, Joins, Stored Procedures, and Transactions**, along with tips on **high-salary answers**. I’ll break it down systematically with examples and explanations.
+
+---
+
+## **1. Indexing**
+
+**Q:** What is indexing in SQL? Explain types and benefits.
+
+**A:**
+
+* **Definition:** An index is a database object that improves the speed of data retrieval on a table at the cost of additional storage and slower write operations (INSERT/UPDATE/DELETE).
+* **Types of Indexes:**
+
+  1. **Clustered Index** – Sorts and stores the data rows in the table based on the key. Each table can have **only one** clustered index.
+
+     ```sql
+     CREATE CLUSTERED INDEX IX_EmployeeID ON Employee(EmployeeID);
+     ```
+  2. **Non-Clustered Index** – A separate structure from the table with pointers to data. A table can have **multiple non-clustered indexes**.
+
+     ```sql
+     CREATE NONCLUSTERED INDEX IX_LastName ON Employee(LastName);
+     ```
+  3. **Unique Index** – Ensures all values in a column are unique.
+  4. **Composite Index** – Index on multiple columns.
+* **Benefits:** Fast search, efficient joins, quick ORDER BY, better performance for WHERE clauses.
+
+**High-salary tip:** Mention **impact on read/write performance, covering indexes, and query execution plans**.
+Example: “I would create a **covering index** if a query selects only certain columns to avoid lookups in the table.”
+
+---
+
+## **2. Views**
+
+**Q:** What is a View? Difference between Views and Tables?
+
+**A:**
+
+* **Definition:** A view is a virtual table created from a SQL query. It does not store data physically (unless it's an indexed/materialized view).
+* **Syntax:**
+
+  ```sql
+  CREATE VIEW vw_Employee AS
+  SELECT EmployeeID, FirstName, LastName, DepartmentID
+  FROM Employee
+  WHERE IsActive = 1;
+  ```
+* **Advantages:**
+
+  * Simplifies complex queries.
+  * Provides security by restricting column access.
+  * Can aggregate or join multiple tables.
+* **Difference with Table:**
+
+  | Feature          | Table | View                |
+  | ---------------- | ----- | ------------------- |
+  | Physical storage | Yes   | No (unless indexed) |
+  | Updatable        | Yes   | Sometimes           |
+  | Can join tables  | N/A   | Yes                 |
+
+**High-salary tip:** Mention **indexed views for performance in SQL Server**.
+
+---
+
+## **3. CTE (Common Table Expression)**
+
+**Q:** What is a CTE? How is it different from a temporary table?
+
+**A:**
+
+* **Definition:** A CTE is a temporary result set defined within a query, reusable only in the execution scope.
+* **Syntax:**
+
+  ```sql
+  WITH EmployeeCTE AS
+  (
+      SELECT EmployeeID, FirstName, DepartmentID
+      FROM Employee
+      WHERE IsActive = 1
+  )
+  SELECT * FROM EmployeeCTE;
+  ```
+* **Recursive CTE Example:** (Useful for hierarchical data)
+
+  ```sql
+  WITH EmployeeHierarchy AS
+  (
+      SELECT EmployeeID, ManagerID, 0 AS Level
+      FROM Employee
+      WHERE ManagerID IS NULL
+      UNION ALL
+      SELECT e.EmployeeID, e.ManagerID, eh.Level + 1
+      FROM Employee e
+      INNER JOIN EmployeeHierarchy eh
+      ON e.ManagerID = eh.EmployeeID
+  )
+  SELECT * FROM EmployeeHierarchy;
+  ```
+
+**High-salary tip:** Discuss **performance impact vs temp tables**, **recursive queries**, and **readability**.
+
+---
+
+## **4. Normalization**
+
+**Q:** Explain normalization and its types.
+
+**A:**
+
+* **Definition:** Process of organizing database tables to reduce redundancy and dependency.
+* **Normal Forms (NF):**
+
+  1. **1NF:** Eliminate duplicate columns; ensure atomic values.
+  2. **2NF:** Remove partial dependency (column depends on part of a composite key).
+  3. **3NF:** Remove transitive dependency (column depends on non-key column).
+  4. **BCNF:** Stronger version of 3NF.
+  5. **4NF & 5NF:** Handle multi-valued and join dependencies (rarely asked in interviews).
+
+**High-salary tip:** Show knowledge of **denormalization for performance optimization** in large OLTP systems.
+
+---
+
+## **5. Joins (Inner Join, Left/Right/Full)**
+
+**Q:** Explain Inner Join with example.
+
+**A:**
+
+* **Definition:** Returns rows when there is a match in both tables.
+* **Example:**
+
+  ```sql
+  SELECT e.EmployeeID, e.FirstName, d.DepartmentName
+  FROM Employee e
+  INNER JOIN Department d
+  ON e.DepartmentID = d.DepartmentID;
+  ```
+* **Other Joins:**
+
+  * **Left Join:** Returns all from left table + matched right table.
+  * **Right Join:** Returns all from right table + matched left table.
+  * **Full Outer Join:** Returns all rows from both tables.
+
+**High-salary tip:** Explain **join performance**, **index impact**, and **query optimization**.
+
+---
+
+## **6. Stored Procedures**
+
+**Q:** What is a Stored Procedure? Advantages?
+
+**A:**
+
+* **Definition:** Precompiled SQL code that can be executed multiple times.
+* **Syntax:**
+
+  ```sql
+  CREATE PROCEDURE GetEmployeeByDept
+      @DeptID INT
+  AS
+  BEGIN
+      SELECT EmployeeID, FirstName, LastName
+      FROM Employee
+      WHERE DepartmentID = @DeptID;
+  END
+  ```
+* **Advantages:**
+
+  * Reduces network traffic (single call).
+  * Enhances security (parameterized, prevents SQL injection).
+  * Easy maintenance and reusability.
+* **High-salary tip:** Mention **error handling (TRY-CATCH), output parameters, and transaction handling** inside procedures.
+
+---
+
+## **7. Transactions**
+
+**Q:** Explain transactions and ACID properties.
+
+**A:**
+
+* **Definition:** A transaction is a sequence of SQL operations executed as a single unit of work. Either all succeed or none.
+* **Syntax:**
+
+  ```sql
+  BEGIN TRANSACTION;
+  UPDATE Account SET Balance = Balance - 100 WHERE AccountID = 1;
+  UPDATE Account SET Balance = Balance + 100 WHERE AccountID = 2;
+  COMMIT TRANSACTION;
+  ```
+* **ACID Properties:**
+
+  * **Atomicity:** All or nothing.
+  * **Consistency:** Data remains consistent.
+  * **Isolation:** Transactions don’t interfere.
+  * **Durability:** Changes persist even after crash.
+* **High-salary tip:** Mention **isolation levels** and **deadlock handling**.
+
+---
+
+## **8. Tips for 2+ Years Experience High-Salary Answers**
+
+* Show **hands-on knowledge** with examples from **your projects**.
+* Mention **performance considerations**, **query optimization**, **indexing strategies**, and **real-world scenarios**.
+* Highlight **error handling, security, and best practices** in SQL coding.
+* Discuss **stored procedures with transactions, logging, and rollback scenarios**.
+
+---
+
+If you want, I can make a **ready-to-use “SQL 2+ years interview question-answer sheet”** in **tabular format with examples** that you can memorize for **high-paying roles**.
+
+Do you want me to do that?
