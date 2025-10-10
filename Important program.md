@@ -121,3 +121,244 @@ Result: 50
 
 Let me know if you want this implemented in another language like Java, Python, or C++.
 
+
+
+Absolutely! For a **2+ year C# interview**, you are likely to be asked **logic-based programming questions**. I’ll give you **common logic interview problems**, explanations, and **C# implementations** for each. These include **Prime numbers, string occurrence, palindrome, Fibonacci, factorial, etc.**, which are frequently asked in interviews.
+
+---
+
+## **1. Prime Number Check**
+
+**Q:** How do you check if a number is prime in C#?
+
+```csharp
+using System;
+
+class Program
+{
+    static bool IsPrime(int n)
+    {
+        if (n <= 1) return false;
+        if (n == 2) return true;
+
+        for (int i = 2; i <= Math.Sqrt(n); i++)
+        {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    static void Main()
+    {
+        int num = 29;
+        Console.WriteLine(IsPrime(num) ? "Prime" : "Not Prime");
+    }
+}
+```
+
+**Logic:** A number is prime if it has only two divisors: 1 and itself. Check divisibility up to √n for efficiency.
+
+---
+
+## **2. Count Occurrences of a Character in String**
+
+**Q:** Count how many times a character appears in a string.
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        string str = "interview";
+        char ch = 'i';
+        int count = 0;
+
+        foreach (char c in str)
+        {
+            if (c == ch) count++;
+        }
+
+        Console.WriteLine($"'{ch}' occurs {count} times");
+    }
+}
+```
+
+**Logic:** Iterate through the string and increment a counter when character matches.
+
+---
+
+## **3. Reverse a String**
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        string str = "hello";
+        char[] arr = str.ToCharArray();
+        Array.Reverse(arr);
+        string reversed = new string(arr);
+        Console.WriteLine(reversed);
+    }
+}
+```
+
+**Logic:** Convert string to char array, reverse it, and create a new string.
+
+---
+
+## **4. Fibonacci Series**
+
+**Q:** Print first N Fibonacci numbers.
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = 10;
+        int a = 0, b = 1;
+        Console.Write($"{a} {b} ");
+        for (int i = 2; i < n; i++)
+        {
+            int c = a + b;
+            Console.Write(c + " ");
+            a = b;
+            b = c;
+        }
+    }
+}
+```
+
+**Logic:** Each number is the sum of previous two numbers.
+
+---
+
+## **5. Factorial of a Number**
+
+```csharp
+using System;
+
+class Program
+{
+    static int Factorial(int n)
+    {
+        if (n <= 1) return 1;
+        return n * Factorial(n - 1);
+    }
+
+    static void Main()
+    {
+        int num = 5;
+        Console.WriteLine(Factorial(num));
+    }
+}
+```
+
+**Logic:** Multiply all integers from 1 to N recursively.
+
+---
+
+## **6. Palindrome Check (String)**
+
+```csharp
+using System;
+
+class Program
+{
+    static bool IsPalindrome(string str)
+    {
+        int i = 0, j = str.Length - 1;
+        while (i < j)
+        {
+            if (str[i] != str[j]) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    static void Main()
+    {
+        string str = "level";
+        Console.WriteLine(IsPalindrome(str) ? "Palindrome" : "Not Palindrome");
+    }
+}
+```
+
+**Logic:** Compare characters from start and end, move towards the center.
+
+---
+
+## **7. Count Word Occurrences in a Sentence**
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        string sentence = "C# is great and C# is powerful";
+        string wordToFind = "C#";
+        int count = 0;
+
+        string[] words = sentence.Split(' ');
+        foreach (string w in words)
+        {
+            if (w.Equals(wordToFind)) count++;
+        }
+
+        Console.WriteLine($"'{wordToFind}' occurs {count} times");
+    }
+}
+```
+
+**Logic:** Split sentence into words and count matching words.
+
+---
+
+## **8. Find Largest Number in Array**
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[] arr = { 5, 12, 3, 45, 7 };
+        int max = arr[0];
+        foreach (int n in arr)
+        {
+            if (n > max) max = n;
+        }
+        Console.WriteLine($"Largest number is {max}");
+    }
+}
+```
+
+**Logic:** Iterate through array, keep track of the largest number.
+
+---
+
+## **Tips for C# Logic Interviews**
+
+1. Always **optimize loops** (e.g., √n for prime numbers).
+2. Mention **recursive vs iterative approaches**.
+3. Explain **time complexity** for each solution (important for high-paying interviews).
+4. Be ready for **combined questions**: e.g., check if a Fibonacci number is prime.
+
+---
+
+If you want, I can make a **full 20–30 common C# interview logic problems sheet**, all ready with **code + explanation + time complexity**, so you can **practice for high-paying interviews** efficiently.
+
+Do you want me to prepare that?
+
+
