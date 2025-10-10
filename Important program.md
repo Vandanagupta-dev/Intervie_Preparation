@@ -361,4 +361,40 @@ If you want, I can make a **full 20–30 common C# interview logic problems shee
 
 Do you want me to prepare that?
 
+using System;
+
+class PrimeProgram
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the number: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+        bool isPrime = true;
+
+        if (number <= 1)
+        {
+            isPrime = false;
+        }
+        else
+        {
+            for (int i = 2; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i == 0) 
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+
+        if (isPrime)
+        {
+            Console.WriteLine($"{number} is Prime");
+        }
+        else
+        {
+            Console.WriteLine($"{number} is Not Prime");
+        }
+    }
+}
 
