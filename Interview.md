@@ -1147,8 +1147,590 @@ WHERE Email IN (
 ```
 
 ---
+Great! Here are **10 more SQL interview questions with clear, simple, and interviewer-friendly answers** 👇
 
-If you want, I can give you **10 more SQL interview questions** with answers.
+---
+
+# 🔥 **10 More SQL Interview Questions & Answers**
+
+---
+
+# ✅ **1. What is the difference between WHERE and HAVING?**
+
+### **WHERE**
+
+* Filters rows **before** grouping.
+* Used with **SELECT, UPDATE, DELETE**.
+
+### **HAVING**
+
+* Filters rows **after** grouping (after GROUP BY).
+* Used **only with aggregates**.
+
+Example:
+
+```sql
+SELECT Department, COUNT(*)
+FROM Employees
+GROUP BY Department
+HAVING COUNT(*) > 5
+```
+
+---
+
+# ✅ **2. What is an Index? Why do we use it?**
+
+### **Index**
+
+A database object that improves the **speed** of searching and filtering.
+
+### You use it on columns used in:
+
+✔ WHERE
+✔ JOIN
+✔ ORDER BY
+✔ GROUP BY
+
+### But:
+
+❌ Slows down INSERT, UPDATE, DELETE
+❌ Uses extra space
+
+---
+
+# ✅ **3. What is the difference between Primary Key and Unique Key?**
+
+| Feature      | Primary Key           | Unique Key             |
+| ------------ | --------------------- | ---------------------- |
+| NULL Allowed | ❌ No                  | ✔ Yes (1 null allowed) |
+| Count        | Only 1 allowed        | Many allowed           |
+| Purpose      | Unique + identify row | Unique only            |
+
+---
+
+# ✅ **4. What is Normalization?**
+
+Process of organizing data to:
+✔ Reduce redundancy
+✔ Improve consistency
+
+### Common Forms:
+
+1. **1NF** – No repeating columns, atomic values
+2. **2NF** – Remove partial dependency
+3. **3NF** – Remove transitive dependency
+
+---
+
+# ✅ **5. What is Denormalization?**
+
+* Opposite of normalization
+* Add redundant data **to increase performance**
+* Used in reporting systems & data warehouses
+
+Example: Storing total price instead of calculating every time.
+
+---
+
+# ✅ **6. What is a Foreign Key?**
+
+A foreign key links two tables by referencing the **primary key** of another table.
+
+Ensures:
+✔ Referential integrity
+✔ Valid relationships
+
+Example:
+
+```sql
+FOREIGN KEY (DeptId) REFERENCES Department(DeptId)
+```
+
+---
+
+# ✅ **7. What is a View?**
+
+A View is a **virtual table** based on a SELECT query.
+
+### Benefits:
+
+✔ Security (hide sensitive columns)
+✔ Reusability
+✔ Simplifies complex queries
+
+Example:
+
+```sql
+CREATE VIEW ActiveUsers AS
+SELECT Name, Email FROM Users WHERE Status = 'Active'
+```
+
+---
+
+# ✅ **8. What is the difference between CHAR and VARCHAR?**
+
+| CHAR         | VARCHAR         |
+| ------------ | --------------- |
+| Fixed length | Variable length |
+| Faster       | Slower          |
+| Wastes space | Saves space     |
+
+Example:
+
+* CHAR(10) → Always 10 characters
+* VARCHAR(10) → Only uses needed space
+
+---
+
+# ✅ **9. What is a Transaction?**
+
+A Transaction is a **group of operations** that must run completely or not at all.
+
+### Properties (ACID):
+
+* **A**tomicity – All or nothing
+* **C**onsistency – Valid state
+* **I**solation – No interference
+* **D**urability – Permanent
+
+Example:
+
+```sql
+BEGIN TRAN
+UPDATE Account SET Balance = Balance - 100 WHERE Id = 1
+UPDATE Account SET Balance = Balance + 100 WHERE Id = 2
+COMMIT
+```
+
+---
+
+# ✅ **10. What is the difference between Union and Union All?**
+
+| UNION              | UNION ALL                  |
+| ------------------ | -------------------------- |
+| Removes duplicates | Does NOT remove duplicates |
+| Slower             | Faster                     |
+| Sorting happens    | No sorting                 |
+
+Example:
+
+```sql
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers
+```
+
+---
+
+If you want, I can provide:
+👉 **Advanced SQL questions**
+👉 **SQL questions for 3–5 years experience**
+👉 **Hands-on practical SQL exercises**
+
+Great! I’ll give you **Advanced SQL Interview Questions (with answers)** — perfect for **3–5 years experience** and commonly asked in real interviews.
+
+---
+
+# 🚀 **Advanced SQL Interview Questions & Answers (Set – 1)**
+
+---
+
+# ✅ **1. What is the difference between Clustered and Non-Clustered Index?**
+
+### **Clustered Index**
+
+* Physically rearranges the table data.
+* Only **one** clustered index per table.
+* Fast for range queries.
+
+### **Non-Clustered Index**
+
+* Separate structure; contains pointer to actual data.
+* Can have **multiple** non-clustered indexes.
+* Slower than clustered index.
+
+### Example:
+
+```sql
+-- Clustered Index
+CREATE CLUSTERED INDEX IX_Employees_Id ON Employees(Id);
+
+-- Non-Clustered Index
+CREATE NONCLUSTERED INDEX IX_Employees_Name ON Employees(Name);
+```
+
+---
+
+# ✅ **2. What is the difference between OLTP and OLAP?**
+
+### **OLTP** (Online Transaction Processing)
+
+* Day-to-day transactions
+* Small, frequent operations
+* Normalized database
+* Examples: Banking, eCommerce
+
+### **OLAP** (Online Analytical Processing)
+
+* Reporting & data analysis
+* Large volume reads
+* Denormalized database
+* Examples: PowerBI, Data Warehouse
+
+---
+
+# ✅ **3. What is a CTE? When do you use it?**
+
+**CTE = Common Table Expression**
+A temporary result set used for simplifying complex queries.
+
+### Example:
+
+```sql
+WITH CTE AS (
+    SELECT *, ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RN
+    FROM Employees
+)
+SELECT * FROM CTE WHERE RN <= 5
+```
+
+### Use CTE when:
+
+✔ Recursion
+✔ Ranking functions
+✔ Improving readability
+
+---
+
+# ✅ **4. How do you get the 2nd highest salary?**
+
+### Method 1: Using `TOP` and `<`
+
+```sql
+SELECT TOP 1 Salary
+FROM Employees
+WHERE Salary < (SELECT MAX(Salary) FROM Employees)
+ORDER BY Salary DESC;
+```
+
+### Method 2: Using `DENSE_RANK()`
+
+```sql
+SELECT Salary
+FROM (
+    SELECT Salary, DENSE_RANK() OVER(ORDER BY Salary DESC) AS RN
+    FROM Employees
+) t
+WHERE RN = 2;
+```
+
+---
+
+# ✅ **5. What is the difference between COUNT(*) and COUNT(column)?**
+
+| COUNT(*)        | COUNT(column)               |
+| --------------- | --------------------------- |
+| Counts all rows | Counts only non-NULL values |
+| Faster          | Slightly slower             |
+| Includes nulls  | Excludes nulls              |
+
+---
+
+# ✅ **6. What is Deadlock in SQL?**
+
+Deadlock occurs when **two processes block each other** by holding a lock on a resource the other needs.
+
+### Example:
+
+* Transaction A locks Table1 and wants Table2
+* Transaction B locks Table2 and wants Table1
+  ➡ SQL kills one process to resolve deadlock
+
+### Avoid deadlocks:
+
+✔ Access tables in same order
+✔ Keep transactions small
+✔ Use proper indexes
+
+---
+
+# ✅ **7. What is an Execution Plan?**
+
+Execution Plan shows how SQL Server executes a query:
+
+* Index scan
+* Index seek
+* Table scan
+* Sort
+* Joins
+
+Use to find:
+✔ Missing indexes
+✔ Slow parts
+✔ Costly operators
+
+```sql
+SET SHOWPLAN_ALL ON;
+```
+
+---
+
+# ✅ **8. How to delete duplicate records but keep one?**
+
+```sql
+WITH cte AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY Email ORDER BY Id) AS rn
+    FROM Users
+)
+DELETE FROM cte WHERE rn > 1;
+```
+
+---
+
+# ✅ **9. What is a Trigger? Types of Triggers?**
+
+A Trigger is an automatic action executed on events like INSERT, UPDATE, DELETE.
+
+### Types:
+
+* **AFTER Trigger**
+* **INSTEAD OF Trigger**
+* **DDL Trigger** (CREATE, DROP, ALTER)
+
+Example:
+
+```sql
+CREATE TRIGGER trg_LogDelete
+ON Employees
+AFTER DELETE
+AS
+INSERT INTO EmpLog SELECT * FROM deleted;
+```
+
+---
+
+# ✅ **10. What are Window Functions? Explain with example.**
+
+Window functions operate on a subset of rows **without collapsing** them.
+
+Examples:
+
+* `ROW_NUMBER()`
+* `RANK()`
+* `SUM() OVER()`
+* `AVG() OVER()`
+
+```sql
+SELECT 
+    Name, Salary,
+    SUM(Salary) OVER (ORDER BY Salary) AS RunningTotal
+FROM Employees;
+```
+
+---
+
+# 🎁 Do you want?
+
+### ✔ **Next Set: More Advanced SQL Questions**
+
+### ✔ **Real-time SQL scenarios (asked in 3–6 yr interviews)**
+
+### ✔ **SQL Practical Questions with Tables & Exercises**
+
+Just tell me: **"Next set"** or **"Give practical questions"**.
+Great! Here is the **Next Set of Advanced SQL Interview Questions (Set – 2)** — highly useful for **3 to 6 years experience** and commonly asked in real company interviews.
+
+---
+
+# 🚀 **Advanced SQL Interview Questions & Answers (Set – 2)**
+
+---
+
+# ✅ **1. What are ACID Properties?**
+
+ACID ensures a safe and reliable transaction:
+
+### **A – Atomicity**
+
+All-or-nothing. If any part fails, entire transaction rolls back.
+
+### **C – Consistency**
+
+Data must move from one valid state to another.
+
+### **I – Isolation**
+
+One transaction should not affect another.
+
+### **D – Durability**
+
+Once committed, data is permanent.
+
+---
+
+# ✅ **2. What are Isolation Levels?**
+
+They control how transaction concurrency works.
+
+| Isolation Level  | Description                       | Issue Prevented      |
+| ---------------- | --------------------------------- | -------------------- |
+| Read Uncommitted | Reads uncommitted data            | None                 |
+| Read Committed   | Reads only committed data         | Dirty Reads          |
+| Repeatable Read  | Locks rows for entire transaction | Non-repeatable reads |
+| Serializable     | Highest; locks entire range       | Phantom reads        |
+
+```sql
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+```
+
+---
+
+# ✅ **3. What is the difference between Temp Table & Table Variable?**
+
+| Feature     | Temp Table            | Table Variable        |
+| ----------- | --------------------- | --------------------- |
+| Syntax      | #Temp                 | @Table                |
+| Stored      | TempDB                | Memory/TempDB         |
+| Indexes     | Allowed               | Limited               |
+| Transaction | Participates          | Limited               |
+| Speed       | Faster for large data | Faster for small data |
+
+Example:
+
+```sql
+DECLARE @tbl TABLE(Id INT)
+CREATE TABLE #Temp(Id INT)
+```
+
+---
+
+# ✅ **4. What is CROSS JOIN?**
+
+Produces **Cartesian product**:
+All rows from table A × all rows from table B.
+
+```sql
+SELECT * FROM Products CROSS JOIN Categories;
+```
+
+If A has 10 rows and B has 5 → Result = **50 rows**
+
+---
+
+# ✅ **5. How to select TOP 1 record per group?**
+
+Example: Highest salary per department
+
+```sql
+WITH CTE AS (
+    SELECT *,
+    ROW_NUMBER() OVER(PARTITION BY Dept ORDER BY Salary DESC) AS RN
+    FROM Employees
+)
+SELECT * FROM CTE WHERE RN = 1;
+```
+
+---
+
+# ✅ **6. What is Difference Between RANK(), ROW_NUMBER() and DENSE_RANK()?**
+
+| Function         | Behavior                            |
+| ---------------- | ----------------------------------- |
+| **ROW_NUMBER()** | No duplicates; unique sequence      |
+| **RANK()**       | Same rank for ties, gaps in ranking |
+| **DENSE_RANK()** | Same rank for ties, no gaps         |
+
+Example:
+
+```sql
+SELECT Salary,
+ROW_NUMBER() OVER(ORDER BY Salary DESC),
+RANK() OVER(ORDER BY Salary DESC),
+DENSE_RANK() OVER(ORDER BY Salary DESC)
+FROM Employees;
+```
+
+---
+
+# ✅ **7. How do you find missing numbers in a sequence?**
+
+Example: Suppose table contains IDs {1, 2, 4, 5, 7}
+
+```sql
+SELECT t1.Id + 1 AS Missing
+FROM Employees t1
+LEFT JOIN Employees t2 ON t1.Id + 1 = t2.Id
+WHERE t2.Id IS NULL;
+```
+
+---
+
+# ✅ **8. What is the difference between Coalesce and ISNULL?**
+
+### **ISNULL(expr, replacement)**
+
+* Only accepts 2 parameters.
+* SQL Server specific.
+
+### **COALESCE(expr1, expr2, expr3...)**
+
+* Accepts multiple arguments.
+* Standard SQL.
+
+Example:
+
+```sql
+SELECT COALESCE(NULL, NULL, 5, 10)  -- returns 5
+```
+
+---
+
+# ✅ **9. What is the difference between UNION and JOIN?**
+
+| UNION                    | JOIN                         |
+| ------------------------ | ---------------------------- |
+| Combines rows vertically | Combines tables horizontally |
+| Columns must match       | No need to match columns     |
+| Removes duplicates       | Does not remove duplicates   |
+
+Example:
+
+```sql
+SELECT Name FROM A
+UNION
+SELECT Name FROM B
+```
+
+---
+
+# ✅ **10. How to update data from another table?**
+
+```sql
+UPDATE E
+SET E.Salary = B.NewSalary
+FROM Employees E
+JOIN BonusTable B ON E.Id = B.EmpId;
+```
+
+---
+
+# 🎁 **Want More?**
+
+I can give you:
+
+👉 **Advanced SQL Set – 3**
+(based on stored procedures, triggers, performance tuning, indexing)
+
+👉 **Real-time SQL practical coding questions**
+(very useful for round 2 technical rounds)
+
+👉 **SQL MCQs for quick interview revision**
+
+Just say:
+**“Give me Set – 3”** or
+**“Give me practical questions”**
+
 
 
 ---
