@@ -316,7 +316,104 @@ Here is the **perfect, interview-level answer** for **ASP.NET Core vs ASP.NET MV
 
 ---
 
-# ⭐ Want a table format for quick revision?
+Here is the **best interview-level explanation** of **Transaction in SQL**, suitable for *2 years experience*.
 
-If yes, type: **"Give table format"**
+---
 
+# ✅ **What is a Transaction in SQL?**
+
+A **transaction** is a group of SQL statements that are executed as a **single unit of work**.
+
+👉 If all statements succeed → **COMMIT**
+👉 If any statement fails → **ROLLBACK**
+
+This ensures **data consistency, accuracy, and integrity**.
+
+---
+
+# 🔥 **ACID Properties (Very Important for Interview)**
+
+A good transaction must follow **ACID**:
+
+### **1. Atomicity**
+
+* All statements run as one unit
+* Either **complete fully** or **rollback fully**
+
+### **2. Consistency**
+
+* Data must remain **valid** before and after the transaction
+
+### **3. Isolation**
+
+* Each transaction runs **independently**
+* No other transaction should interfere
+
+### **4. Durability**
+
+* Once committed → changes are **permanent** even if system crashes
+
+---
+
+# 🧾 **Basic Syntax of SQL Transaction**
+
+```sql
+BEGIN TRANSACTION;
+
+-- SQL statements
+UPDATE Accounts SET Balance = Balance - 1000 WHERE AccountID = 1;
+UPDATE Accounts SET Balance = Balance + 1000 WHERE AccountID = 2;
+
+COMMIT;   -- If everything is OK
+-- ROLLBACK;  -- If any error occurs
+```
+
+---
+
+# 📌 **Example: Money Transfer Scenario**
+
+### Step 1: Deduct amount
+
+### Step 2: Add amount to another account
+
+If any step fails → rollback
+
+```sql
+BEGIN TRAN;
+
+UPDATE Account SET Balance = Balance - 5000 WHERE AccNo = 101;
+UPDATE Account SET Balance = Balance + 5000 WHERE AccNo = 102;
+
+IF @@ERROR <> 0
+    ROLLBACK;
+ELSE
+    COMMIT;
+```
+
+---
+
+# ⭐ **Interview-Ready Explanation (Short Answer)**
+
+> A transaction in SQL is a group of one or more SQL statements executed as a single logical unit to ensure data consistency.
+> SQL transactions follow ACID properties and use **BEGIN TRAN**, **COMMIT**, and **ROLLBACK** to manage changes.
+
+---
+
+# 🔹 **Commands Related to Transactions**
+
+| Command                     | Purpose                     |
+| --------------------------- | --------------------------- |
+| **BEGIN TRAN / START TRAN** | Start a transaction         |
+| **COMMIT**                  | Save all changes            |
+| **ROLLBACK**                | Undo all changes            |
+| **SAVEPOINT**               | Create rollback checkpoints |
+
+---
+
+# 🚀 If you want, I can also give:
+
+✔ Real interview questions on Transactions
+✔ Transaction with TRY–CATCH block example
+✔ Stored procedure with transaction example
+
+J
