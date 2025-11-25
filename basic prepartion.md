@@ -146,3 +146,177 @@ Calculations (Age, Tax, Total, Discount)
 Reusable expressions inside SELECT
 
 Return table for joins
+--------------------------------
+await keyword asynchronous task ko non-blocking tarike me chalata hai.
+Ye method ko pause karta hai, thread free kar deta hai, aur task complete hone par wapas resume karta hai.
+
+
+Here is the **perfect, interview-level answer** for **ASP.NET Core vs ASP.NET MVC** — exactly suitable for **2 years experience**.
+
+---
+
+# ✅ **ASP.NET Core vs ASP.NET MVC – Interview-Level Differences**
+
+## **1. Framework Type**
+
+### **ASP.NET MVC**
+
+* Runs only on **.NET Framework** → **Windows only**.
+* Older technology (no longer actively enhanced).
+
+### **ASP.NET Core**
+
+* **Cross-platform** (Windows, Linux, macOS).
+* Runs on **.NET (Core + 5+)**, modern, high-performance.
+
+---
+
+## **2. Performance**
+
+### **ASP.NET MVC**
+
+* Heavy due to IIS dependency, System.Web overhead.
+* Slow request pipeline.
+
+### **ASP.NET Core**
+
+* Extremely fast:
+
+  * No System.Web
+  * Modular pipeline
+  * Built-in dependency injection
+  * Kestrel web server
+* Best for high-performance apps and microservices.
+
+---
+
+## **3. Hosting**
+
+### **ASP.NET MVC**
+
+* Only runs on **IIS**.
+
+### **ASP.NET Core**
+
+* Host anywhere:
+
+  * IIS
+  * Kestrel
+  * Apache
+  * Nginx
+  * Docker
+  * Cloud (Azure/AWS)
+
+---
+
+## **4. Architecture**
+
+### **ASP.NET MVC**
+
+* Follows classic MVC pattern.
+* No built-in DI (dependency injection).
+* Tight coupling with **System.Web**.
+
+### **ASP.NET Core**
+
+* Modern, modular architecture.
+* **Built-in DI**
+* **Middleware-based pipeline**
+* Better testability and flexibility.
+
+---
+
+## **5. Cross-Platform & Open Source**
+
+### **ASP.NET MVC**
+
+* Not cross-platform
+* Not open-source (full framework)
+
+### **ASP.NET Core**
+
+* Fully **open-source**
+* Completely **cross-platform**
+
+---
+
+## **6. Configuration**
+
+### **ASP.NET MVC**
+
+* Uses **web.config** (XML based)
+* Hard to manage and bulky
+
+### **ASP.NET Core**
+
+* Uses **appsettings.json**, environment-based configuration
+* Light, simple, easy to manage
+
+---
+
+## **7. Deployment**
+
+### **ASP.NET MVC**
+
+* Deploy only on Windows IIS.
+
+### **ASP.NET Core**
+
+* Deploy anywhere + supports self-hosting.
+
+---
+
+## **8. Razor Views**
+
+### **ASP.NET MVC**
+
+* Razor older version.
+
+### **ASP.NET Core**
+
+* Improved Razor engine (faster + enhanced).
+
+---
+
+## **9. Client-side Integration**
+
+### **ASP.NET MVC**
+
+* Limited support.
+
+### **ASP.NET Core**
+
+* First-class support:
+
+  * Angular
+  * React
+  * Vue
+  * SPA templates
+  * Web APIs
+
+---
+
+## **10. Web API Support**
+
+### **ASP.NET MVC**
+
+* Web API is a **separate framework**.
+
+### **ASP.NET Core**
+
+* MVC + Web API **merged** → one unified framework.
+
+---
+
+# 🎯 **Short Punchline (Final Interview Answer)**
+
+> **ASP.NET MVC** is the older, Windows-only framework running on .NET Framework with System.Web and IIS dependency.
+>
+> **ASP.NET Core** is the modern, cross-platform, high-performance, open-source framework with built-in DI, lightweight middleware pipeline, unified MVC/Web API, JSON configuration, and flexible hosting.
+
+---
+
+# ⭐ Want a table format for quick revision?
+
+If yes, type: **"Give table format"**
+
