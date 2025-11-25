@@ -89,4 +89,60 @@ Clear, practical, and compares **ASP.NET Web Forms vs ASP.NET MVC** exactly how 
 
 ---
 
+📌 2. Trigger
+Definition:
 
+A trigger is a special stored procedure that executes automatically when INSERT, UPDATE, or DELETE happens on a table.
+
+Key Points:
+
+Auto-fired — cannot be called manually.
+
+Used for auditing, logging, data validation.
+
+Works with Inserted and Deleted pseudo-tables.
+
+Cannot accept parameters.
+
+Should be lightweight to avoid performance issues.
+
+When to Use:
+
+Audit logs (who inserted/updated data)
+
+Auto-calculation (e.g., update stock after sale)
+
+Enforcing rules that application should not bypass
+
+📌 3. Function
+Definition:
+
+A function returns a single value or a table, and must return something.
+
+Key Points:
+
+Must return value (scalar or table).
+
+No side effects → cannot perform INSERT/UPDATE/DELETE on tables (except inline table-valued functions).
+
+Can be used in SELECT statements.
+
+No transaction control (cannot use COMMIT/ROLLBACK).
+
+More lightweight than stored procedures.
+
+Types:
+
+Scalar Function → returns one value
+
+Inline Table-Valued Function
+
+Multi-Statement Table-Valued Function
+
+When to Use:
+
+Calculations (Age, Tax, Total, Discount)
+
+Reusable expressions inside SELECT
+
+Return table for joins
