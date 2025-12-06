@@ -119,3 +119,162 @@ Analogies, Series, Coding-Decoding, Blood Relation, Direction sense रोज �
 # 💬 अगर चाहो तो मैं आपको **30 days plan**, **PDF notes**, या **daily timetable** भी बना दूँ।
 
 बस बता देना कि आपको **RRB NTPC, Group D, ALP या SSC** में से कौन सा exam देना है।
+
+
+Perfect! अब मैं आपको **RRB CBT–1 Exam** के लिए पूरा **30 Days का Premium Study Plan + PDF प्रकार के Notes + Daily Timetable** दे रहा हूँ।
+यह Railway के हिसाब से 100% exam-oriented है।
+
+---
+
+# ⭐ **RRB CBT–1 : 30 Days Super Study Plan**
+
+(तैयारी बिल्कुल ZERO से शुरू मानकर बनाया है)
+
+---
+
+# 📅 **WEEK 1 (Day 1–7) – बेस मज़बूत करना**
+
+### **Mathematics**
+
+* Number System
+* BODMAS
+* LCM / HCF
+* Fractions & Decimals
+* Ratio & Proportion
+
+**Daily Practice:**
+30–40 questions (Railway Previous Paper)
+
+### **Reasoning**
+
+* Analogy
+* Odd One Out
+* Classification
+* Alphabet series
+* Number series
+
+### **General Awareness**
+
+* 2 months Current Affairs
+* Indian Polity (Basics)
+* Important Days & Events
+
+### **General Science**
+
+* Biology: Cell, Tissues, Nutrition, Diseases
+* Physics: Motion, Force, Work, Energy
+
+---
+
+# 📅 **WEEK 2 (Day 8–14) – Concept + Speed**
+
+### **Mathematics**
+
+* Percentage
+* Profit & Loss
+* Simple Interest
+* Compound Interest
+* Time & Work
+* Time, Distance, Speed
+
+### **Reasoning**
+
+* Coding–Decoding
+* Blood Relation
+* Direction Test
+* Venn Diagram
+* Syllogism (Most scoring)
+
+### **General Awareness**
+
+* Geography of India
+* History (Freedom Struggle)
+* Economics Basics
+
+### **General Science**
+
+* Chemistry Basics (Atoms, Elements, Compounds)
+* Physics (Light, Sound, Heat)
+
+---
+
+# 📅 **WEEK 3 (Day 15–21) – Exam-level Practice**
+
+### **Mathematics**
+
+* Algebra
+* Mensuration (2D + 3D)
+* Trigonometry (very basic)
+* Age problems
+* Pipes & Cistern
+
+### **Reasoning**
+
+* Analytical Reasoning
+* Puzzle (Basic)
+* Statement & Conclusion
+* Decision Making
+* Data Interpretation
+
+### **General Awareness**
+
+* Static GK (Important)
+* Constitution
+* Government Schemes
+
+### **General Science**
+
+* 8th to 10th Class NCERT Important Chapters
+* Human Body
+* Electricity, Magnetism
+
+---
+
+# 📅 **WEEK 4 (Day 22–30) – Mock Test + Revision**
+
+### **Daily Routine**
+
+✔ 1 Full Mock Test
+✔ Weak chapters का revision
+✔ Previous Year Papers (RRB NTPC, Group D, ALP)
+
+### **Focus**
+
+* Speed बढ़ाना
+* Accuracy improve
+* Short tricks revise
+* Frequently asked GK memorize
+
+---
+
+# 🕒 **DAILY STUDY TIMETABLE (4–6 Hours)**
+
+| Time   | Subject            |
+| ------ | ------------------ |
+| 1 hr   | Maths              |
+| 1 hr   | Reasoning          |
+| 1 hr   | General Science    |
+| 30 min | Current Affairs    |
+| 30 min | Revision           |
+| 30 min | Questions practice |
+
+---
+
+# ⭐ FREE PDF MATERIAL (मैं आपको दे दूँ)
+
+अगर आप चाहें तो मैं आपके लिए नीचे PDFs तैयार कर दूँ:
+
+### ✓ Maths Formula PDF
+
+### ✓ Reasoning Tricks PDF
+
+### ✓ General Science NCERT Summary PDF
+
+### ✓ 6 Months Current Affairs PDF
+
+### ✓ RRB CBT–1 Question Bank PDF
+
+बस मुझे बता दें—
+**आपको कौन-कौन से PDF चाहिए?**
+मैं तुरंत तैयार कर देता हूँ।
+
