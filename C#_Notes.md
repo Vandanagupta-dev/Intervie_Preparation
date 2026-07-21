@@ -597,5 +597,374 @@ SELECT
 FROM Student
 GROUP BY Name;
 
+-------------------
+
+Agar aap **"Object reference not set to an instance of an object"** yani **`NullReferenceException`** ki baat kar rahi ho, to ye tab aata hai jab aap kisi **`null` object** ki property, method ya member access karne ki koshish karte ho.
+
+## 1. Object initialize nahi hua
+
+```csharp
+Student student = null;
+
+Console.WriteLine(student.Name);
+```
+
+Yahan `student` `null` hai, isliye:
+
+```text
+Object reference not set to an instance of an object.
+```
+
+### Fix:
+
+```csharp
+Student student = new Student();
+
+Console.WriteLine(student.Name);
+```
+
+---
+
+## 2. Method se `null` return hua
+
+```csharp
+var student = GetStudent();
+
+Console.WriteLine(student.Name);
+```
+
+Agar:
+
+```csharp
+GetStudent()
+```
+
+`null` return karta hai, to error aayega.
+
+### Fix:
+
+```csharp
+var student = GetStudent();
+
+if (student != null)
+{
+    Console.WriteLine(student.Name);
+}
+```
+
+Ya:
+
+```csharp
+Console.WriteLine(student?.Name);
+```
+
+---
+
+## 3. Database se record nahi mila
+
+Aapke **Dapper** code mein ye bahut common case hai:
+
+```csharp
+var customer = await connection.QueryFirstOrDefaultAsync<Customer>(
+    "SELECT * FROM Customer WHERE Id = @Id",
+    new { Id = id }
+);
+
+Console.WriteLine(customer.Name);
+```
+
+Agar `Id` ka record database mein nahi mila, `customer` `null` hoga.
+
+### Fix:
+
+```csharp
+if (customer == null)
+{
+    return NotFound("Customer not found.");
+}
+
+Console.WriteLine(customer.Name);
+```
+
+---
+
+## 4. List/Collection null hai
+
+```csharp
+List<Student> students = null;
+
+foreach (var student in students)
+{
+    Console.WriteLine(student.Name);
+}
+```
+
+### Fix:
+
+```csharp
+if (students != null)
+{
+    foreach (var student in students)
+    {
+        Console.WriteLine(student.Name);
+    }
+}
+```
+
+Ya initialize karo:
+
+```csharp
+List<Student> students = new List<Student>();
+```
+
+---
+
+## 5. Nested object null hai
+
+Ye bahut common hai:
+
+```csharp
+var employee = new Employee();
+
+Console.WriteLine(employee.Department.Name);
+```
+
+Yahan `employee` available hai, lekin:
+
+```csharp
+employee.Department
+```
+
+`null` hai.
+
+### Fix:
+
+```csharp
+Console.WriteLine(employee.Department?.Name);
+```
+
+---
+
+## 6. Dependency Injection mein object null
+
+ASP.NET Core mein:
+
+```csharp
+private readonly IStudentService _studentService;
+```
+
+Agar constructor mein properly inject nahi hua:
+
+```csharp
+public StudentController()
+{
+}
+```
+
+Aur baad mein:
+
+```csharp
+_studentService.GetStudents();
+```
+
+to problem ho sakti hai.
+
+### Correct:
+
+```csharp
+private readonly IStudentService _studentService;
+
+public StudentController(
+    IStudentService studentService)
+{
+    _studentService = studentService;
+}
+```
+
+Aur `Program.cs` mein:
+
+```csharp
+builder.Services.AddScoped<IStudentService, StudentService>();
+```
+
+---
+
+## 7. Request Body null
+
+API mein:
+
+```csharp
+[HttpPost]
+public IActionResult Save(Student student)
+{
+    string name = student.Name;
+}
+```
+
+Agar request body se `student` null aa gaya, error ho sakta hai.
+
+### Fix:
+
+```csharp
+if (student == null)
+{
+    return BadRequest("Student data is required.");
+}
+```
+
+---
+
+## 8. `FirstOrDefault()` se null
+
+```csharp
+var student = students
+    .FirstOrDefault(x => x.Id == 100);
+
+Console.WriteLine(student.Name);
+```
+
+Agar student nahi mila:
+
+```csharp
+student == null
+```
+
+### Fix:
+
+```csharp
+if (student == null)
+{
+    return;
+}
+```
+
+---
+
+## 9. Dictionary se value null
+
+```csharp
+var student = dictionary["Student"];
+
+Console.WriteLine(student.Name);
+```
+
+Agar dictionary mein value `null` hai, issue aa sakta hai.
+
+---
+
+## 10. String null
+
+```csharp
+string name = null;
+
+Console.WriteLine(name.ToUpper());
+```
+
+### Fix:
+
+```csharp
+Console.WriteLine(name?.ToUpper());
+```
+
+---
+
+## 11. Object ke andar object null
+
+Example:
+
+```csharp
+Order order = new Order();
+
+order.Customer = null;
+
+Console.WriteLine(order.Customer.Address.City);
+```
+
+Yahan chain mein `Customer` null hai.
+
+Safe way:
+
+```csharp
+Console.WriteLine(
+    order.Customer?.Address?.City
+);
+```
+
+---
+
+## 12. Aapke Excel Import wale code mein
+
+Aapke current code ke context mein bhi possibilities hain:
+
+```csharp
+document.Details.Add(detail);
+```
+
+Agar:
+
+```csharp
+document.Details
+```
+
+null hai, error aayega.
+
+Isliye aapne jo kiya hai wo correct hai:
+
+```csharp
+Details = new List<MilkShiftUploaderDetailDto>()
+```
+
+Similarly:
+
+```csharp
+document.Details.Count
+```
+
+se pehle `Details` null nahi hona chahiye.
+
+---
+
+### ⭐ Easy Formula
+
+Jab bhi error aaye:
+
+> **Object reference not set to an instance of an object**
+
+Debugger mein dekho **jis line par yellow highlight hai**, us line mein jitne objects hain, unko check karo:
+
+```csharp
+A.B.C.D
+```
+
+Check karo:
+
+```text
+A == null ?
+B == null ?
+C == null ?
+```
+
+Jahan `null` milega, wahi problem ka source hai.
+
+### Example:
+
+```csharp
+student.Department.Manager.Name
+```
+
+Possible null objects:
+
+```text
+student                  ❌
+student.Department       ❌
+student.Department.Manager ❌
+```
+
+**Best debugging technique:** Breakpoint lagao → `F10` se line-by-line chalo → **Locals/Watch** mein objects check karo → **Call Stack** se dekho method kis flow se yahan aaya.
+
+**Note:** `NullReferenceException` aur `"does not contain a definition for..."` alag errors hain. Pehla **runtime error** hai, doosra **compile-time error** hai.
+
+
+
 
 
