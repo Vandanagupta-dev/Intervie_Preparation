@@ -580,4 +580,15 @@ TRACE /some-path HTTP/1.1
 | **Restart**         | `Ctrl + Shift + F5` | Application ko restart karta hai                           |
 
 
+🔹 Debugging Windows
+Locals → Current method ke local variables dekhna
+Autos → Current/previous line se related variables
+Watch → Kisi specific variable/expression ko monitor karna
+Immediate Window → Runtime par C# expressions execute/check karna
+Call Stack → Kaunse methods kis sequence mein call hue, ye dekhna
+Output → Debugging/build logs dekhna
+Exception Settings → Exceptions par debugger ko break karwana
+Breakpoints Window → Saare breakpoints manage karna
+
+
 
