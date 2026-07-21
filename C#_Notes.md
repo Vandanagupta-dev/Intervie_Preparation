@@ -591,4 +591,11 @@ Exception Settings → Exceptions par debugger ko break karwana
 Breakpoints Window → Saare breakpoints manage karna
 
 
+SELECT 
+    Name,
+    SUM(Marks) AS TotalMarks
+FROM Student
+GROUP BY Name;
+
+
 
