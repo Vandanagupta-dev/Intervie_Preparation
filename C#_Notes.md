@@ -568,6 +568,16 @@ TRACE /some-path HTTP/1.1
 
 ---
 
-Let me know if you'd like a diagram or code examples using C#, JavaScript, or Postman!
+| Tool                | Shortcut            | Meaning                                                    |
+| ------------------- | ------------------- | ---------------------------------------------------------- |
+| **Breakpoint**      | `F9`                | Code ki execution ko particular line par rokta hai         |
+| **Start Debugging** | `F5`                | Debug mode mein application run karta hai                  |
+| **Step Over**       | `F10`               | Current line execute karta hai, method ke andar nahi jaata |
+| **Step Into**       | `F11`               | Method/function ke andar jaata hai                         |
+| **Step Out**        | `Shift + F11`       | Current method se bahar aa jaata hai                       |
+| **Continue**        | `F5`                | Next breakpoint tak execution continue karta hai           |
+| **Stop Debugging**  | `Shift + F5`        | Debugging stop karta hai                                   |
+| **Restart**         | `Ctrl + Shift + F5` | Application ko restart karta hai                           |
+
 
 
