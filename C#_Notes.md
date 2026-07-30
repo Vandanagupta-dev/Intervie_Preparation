@@ -963,7 +963,47 @@ student.Department.Manager ❌
 **Best debugging technique:** Breakpoint lagao → `F10` se line-by-line chalo → **Locals/Watch** mein objects check karo → **Call Stack** se dekho method kis flow se yahan aaya.
 
 **Note:** `NullReferenceException` aur `"does not contain a definition for..."` alag errors hain. Pehla **runtime error** hai, doosra **compile-time error** hai.
+🔹 C# & Core Concepts
+IEnumerable aur IQueryable mein kya difference hai?
 
+Hint: IEnumerable filter memory (client side) mein karta hai, jabki IQueryable filter ki query database (server side) par execute karta hai.
+
+Task.Run aur async/await mein kya farq hai?
+
+Hint: async/await threads ko block nahi karta (UI ya server thread free rehta hai), jabki Task.Run ek naya background thread create karta hai CPU-bound work ke liye.
+
+Value types aur Reference types kahan store hote hain?
+
+Hint: Value types Stack par (usually) aur Reference types Heap par. Garbage collector Heap ko manage karta hai.
+
+🔹 ASP.NET Core
+Dependency Injection (DI) lifetimes kya hote hain? (Transient, Scoped, Singleton)
+
+Hint:
+
+Transient: Har baar naya instance.
+
+Scoped: Ek HTTP request ke andar same instance (ideal for DB Context).
+
+Singleton: Poore application lifecycle mein ek hi instance.
+
+Middleware aur Action Filters mein kya difference hai?
+
+Hint: Middleware request pipeline mein sabse pehle hit hota hai (global level), aur Action Filter MVC/API pipeline ka hissa hai (Controller/Action method level par hit hota hai).
+
+🔹 Entity Framework Core & Database
+Entity Framework mein N+1 query problem kya hai aur isko kaise solve karte hain?
+
+Hint: Jab ek list fetch hoti hai aur uske child records loop mein baar-baar DB hit karte hain. Isko Eager Loading (.Include()) use karke solve karte hain.
+
+Lazy Loading aur Eager Loading mein kab kaunsa use karna chahiye?
+
+Hint: API mein usually Eager loading better hoti hai taaki JSON serialize karte waqt extra queries fire na hon.
+
+🔹 Architecture & Design Patterns
+Repository Pattern kyu use karte hain?
+
+Hint: Data access logic ko business logic se alag (decouple) karne ke liye, taaki unit testing aasan ho jaye aur DB logic ek jagah centralized ho.
 
 
 
